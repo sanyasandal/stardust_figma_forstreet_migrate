@@ -24,6 +24,14 @@ export default function decorate(block) {
 
   if (list) {
     const items = list.querySelectorAll(':scope > li');
+    // The delivered list (DA → markdown → HTML) carries newline text nodes between and around
+    // the items; in this inline trail they would render as spaces the source never had
+    // ("Home About us" vs "HomeAbout us"). They are markup whitespace, not authored text.
+    const dropWhitespace = (el) => [...el.childNodes].forEach((n) => {
+      if (n.nodeType === Node.TEXT_NODE && !n.textContent.trim()) n.remove();
+    });
+    dropWhitespace(list);
+    items.forEach(dropWhitespace);
     const current = items[items.length - 1];
     if (current) {
       let link = current.querySelector('a');
