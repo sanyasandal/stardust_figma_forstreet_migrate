@@ -1,0 +1,96 @@
+/* accordion — oneAZ M1: hairline rows, title Lexia 36/40 mulberry (mobile 26/34), accent chevron */
+.accordion .accordion-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: var(--layout-stack-gap);
+  border-bottom: 1px solid var(--palette-hairline);
+}
+
+.accordion .accordion-item + .accordion-item {
+  margin-top: var(--layout-accordion-title-gap);
+}
+
+.accordion .accordion-title {
+  grid-column: 1;
+  padding: 0 0 var(--layout-accordion-title-gap);
+  font-family: var(--type-accordion-font-family);
+  font-size: var(--type-accordion-font-size);
+  font-weight: var(--type-accordion-font-weight);
+  line-height: var(--type-accordion-line-height);
+  letter-spacing: var(--type-accordion-letter-spacing);
+  color: var(--palette-heading-fg);
+  cursor: pointer;
+}
+
+.accordion .accordion-title :is(p, h2, h3, h4, h5, h6) {
+  margin: 0;
+  font: inherit;
+  color: inherit;
+}
+
+.accordion .accordion-glyph {
+  display: none;
+}
+
+/* chevron-only toggle, vertically centred on the first title line */
+.accordion .accordion-toggle {
+  grid-column: 2;
+  align-self: start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--layout-stack-gap) * 1.5);
+  height: var(--type-accordion-line-height);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--palette-accent);
+  cursor: pointer;
+}
+
+.accordion .accordion-toggle::before {
+  content: "";
+  width: calc(var(--layout-stack-gap) / 2);
+  height: calc(var(--layout-stack-gap) / 2);
+  border: solid currentcolor;
+  border-width: 0 var(--layout-rule-width) var(--layout-rule-width) 0;
+  transform: translateY(calc(var(--layout-rule-width) * -1)) rotate(45deg);
+}
+
+.accordion .accordion-toggle[aria-expanded="true"]::before {
+  transform: translateY(var(--layout-rule-width)) rotate(-135deg);
+}
+
+.accordion .accordion-toggle:focus-visible {
+  outline: var(--layout-rule-width) solid var(--palette-accent);
+}
+
+.accordion .accordion-panel {
+  grid-column: 1 / -1;
+  padding: 0 0 calc(var(--layout-stack-gap) * 1.5);
+  font-family: var(--type-body-font-family);
+  font-size: var(--type-body-font-size);
+  line-height: var(--type-body-line-height);
+}
+
+.accordion .accordion-panel[hidden] {
+  padding: 0;
+}
+
+@media (width < 900px) {
+  .accordion .accordion-title {
+    padding-bottom: var(--layout-mobile-accordion-title-gap);
+    font-size: var(--type-h3-font-size);
+    line-height: var(--type-h3-line-height);
+  }
+
+  .accordion .accordion-toggle {
+    height: var(--type-h3-line-height);
+  }
+}
+
+/* a fragment table closing a panel: the panel's own bottom padding is the gap */
+.accordion .accordion-panel .table-wrapper:last-child .table {
+  margin-bottom: 0;
+}
