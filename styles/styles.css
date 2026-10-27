@@ -324,11 +324,31 @@ a:any-link {
 }
 a:hover { color: var(--link-hover-color); }
 
+/* visually hidden, still read by assistive tech and kept in innerText */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 img {
   display: block;
   max-width: 100%;
   height: auto;
 }
+
+/* a content figure keeps its content size, as the gated reskin page renders it (stream-render .media) */
+main .default-content-wrapper p > picture:only-child img {
+  width: auto;
+  max-height: 360px;
+}
+
 main p:has(> picture:only-child) { line-height: 0; }
 
 input, textarea, select, button { font: inherit; }

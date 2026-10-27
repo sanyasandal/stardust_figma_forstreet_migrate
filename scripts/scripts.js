@@ -77,6 +77,26 @@ function buildWidgetAutoBlocks(main) {
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
+/**
+ * The source marks external links with a visually hidden "(opens in new window)". DA strips
+ * the span, so the phrase arrives as visible link text: split it back into an .sr-only span
+ * (same text, same innerText — only its visibility is restored).
+ * @param {Element} main The container element
+ */
+function decorateNewWindowLabels(main) {
+  const LABEL = '(opens in new window)';
+  main.querySelectorAll('a').forEach((a) => {
+    if (a.closest('.cards')) return; // the cards block handles its own
+    const last = [...a.childNodes].reverse().find((n) => n.nodeType === Node.TEXT_NODE);
+    if (!last || !last.textContent.endsWith(LABEL)) return;
+    const tail = last.splitText(last.textContent.length - LABEL.length);
+    const span = document.createElement('span');
+    span.className = 'sr-only';
+    tail.replaceWith(span);
+    span.append(tail);
+  });
+}
+
 function buildAutoBlocks(main) {
   try {
     // auto load `*/fragments/*` references
@@ -153,6 +173,7 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   decorateButtons(main);
+  decorateNewWindowLabels(main);
 }
 
 /**
