@@ -6,9 +6,13 @@
  * "Lexia" first (the donor token string) and self-host Roboto Slab (SIL OFL) as the served stand-in; license
  * Lexia and add its woff2 to fonts/ + styles/fonts.css to serve the real face (fonts/LICENSING.md).
  */
+
+/* The token values below are the donor sheet's strings VERBATIM — the deployed token gate asserts each one
+   byte-for-byte, so stylelint must not rewrite their notation. */
+/* stylelint-disable color-function-notation, color-function-alias-notation, alpha-value-notation, value-keyword-case, comment-empty-line-before, font-family-name-quotes, no-duplicate-selectors, declaration-empty-line-before */
 :root {
-  --heading-font-family: lexia, "Roboto Slab", georgia, serif;
-  --body-font-family: inter, arial, sans-serif;
+  --heading-font-family: Lexia, "Roboto Slab", Georgia, serif;
+  --body-font-family: Inter, Arial, sans-serif;
   --heading-xxl: 56px;
   --heading-xl: 46px;
   --heading-lg: 26px;
@@ -17,16 +21,16 @@
   --body-sm: 12px;
   --line-height-heading: 60px;
   --line-height-body: 24px;
-  --color-bg: rgb(255 255 255);
-  --color-fg: rgb(60 66 66);
-  --color-accent: rgb(208 0 111);
+  --color-bg: rgb(255, 255, 255);
+  --color-fg: rgb(60, 66, 66);
+  --color-accent: rgb(208, 0, 111);
   --section-padding: 40px;
   --max-width: 1180px;
   --radius: 4px;
-  --card-bg: rgb(235 239 238);
+  --card-bg: rgb(235, 239, 238);
   --card-radius: 8px;
   --card-padding: 24px;
-  --card-title-color: rgb(208 0 111);
+  --card-title-color: rgb(208, 0, 111);
   --button-height: 42px;
   --section-padding-mobile: 20px;
   --gutter-mobile: 16px;
@@ -94,101 +98,99 @@
   --type-card-tag-line-height: 28px;
   --type-card-tag-weight: 700;
   --type-card-tag-letter-spacing: normal;
-
   /* absent in donor-tokens.json: --spacing-xs, --spacing-sm, --spacing-md, --spacing-lg, --spacing-xl, --spacing-2xl */
 }
 
-/* stylelint-disable-next-line no-duplicate-selectors -- the first :root is the token-contract block canon keeps */
 :root {
-  --palette-page-bg: rgb(255 255 255);
-  --palette-body-fg: rgb(60 66 66);
-  --palette-heading-fg: rgb(131 0 81);
-  --palette-muted-fg: rgb(141 143 143);
-  --palette-accent: rgb(208 0 111);
-  --palette-light-band-bg: rgb(235 239 238);
-  --palette-dark-band-bg: rgb(60 66 66);
-  --palette-dark-band-fg: rgb(255 255 255);
-  --palette-border-fg: rgb(178 180 180);
-  --palette-rule-fg: rgb(240 171 0);
-  --palette-hairline: rgb(216 218 218);
-  --type-family: inter, arial, sans-serif;
-  --type-display-font-family: lexia, "Roboto Slab", georgia, serif;
+  --palette-page-bg: rgb(255, 255, 255);
+  --palette-body-fg: rgb(60, 66, 66);
+  --palette-heading-fg: rgb(131, 0, 81);
+  --palette-muted-fg: rgb(141, 143, 143);
+  --palette-accent: rgb(208, 0, 111);
+  --palette-light-band-bg: rgb(235, 239, 238);
+  --palette-dark-band-bg: rgb(60, 66, 66);
+  --palette-dark-band-fg: rgb(255, 255, 255);
+  --palette-border-fg: rgb(178, 180, 180);
+  --palette-rule-fg: rgb(240, 171, 0);
+  --palette-hairline: rgb(216, 218, 218);
+  --type-family: Inter, Arial, sans-serif;
+  --type-display-font-family: Lexia, "Roboto Slab", Georgia, serif;
   --type-display-font-size: 56px;
   --type-display-font-weight: 400;
   --type-display-line-height: 60px;
   --type-display-letter-spacing: normal;
   --type-display-text-align: left;
-  --type-h2-font-family: lexia, "Roboto Slab", georgia, serif;
+  --type-h2-font-family: Lexia, "Roboto Slab", Georgia, serif;
   --type-h2-font-size: 46px;
   --type-h2-font-weight: 400;
   --type-h2-line-height: 50px;
   --type-h2-letter-spacing: normal;
-  --type-h3-font-family: lexia, "Roboto Slab", georgia, serif;
+  --type-h3-font-family: Lexia, "Roboto Slab", Georgia, serif;
   --type-h3-font-size: 26px;
   --type-h3-font-weight: 400;
   --type-h3-line-height: 34px;
   --type-h3-letter-spacing: normal;
-  --type-h4-font-family: lexia, "Roboto Slab", georgia, serif;
+  --type-h4-font-family: Lexia, "Roboto Slab", Georgia, serif;
   --type-h4-font-size: 24px;
   --type-h4-font-weight: 400;
   --type-h4-line-height: 28px;
   --type-h4-letter-spacing: normal;
-  --type-body-font-family: inter, arial, sans-serif;
+  --type-body-font-family: Inter, Arial, sans-serif;
   --type-body-font-size: 16px;
   --type-body-font-weight: 400;
   --type-body-line-height: 24px;
   --type-body-letter-spacing: normal;
-  --type-body-large-font-family: inter, arial, sans-serif;
+  --type-body-large-font-family: Inter, Arial, sans-serif;
   --type-body-large-font-size: 18px;
   --type-body-large-font-weight: 400;
   --type-body-large-line-height: 28px;
   --type-body-large-letter-spacing: normal;
-  --type-body-small-font-family: inter, arial, sans-serif;
+  --type-body-small-font-family: Inter, Arial, sans-serif;
   --type-body-small-font-size: 12px;
   --type-body-small-font-weight: 400;
   --type-body-small-line-height: 16px;
   --type-body-small-letter-spacing: normal;
-  --type-nav-font-family: lexia, "Roboto Slab", georgia, serif;
+  --type-nav-font-family: Lexia, "Roboto Slab", Georgia, serif;
   --type-nav-font-size: 14px;
   --type-nav-font-weight: 400;
   --type-nav-line-height: 16px;
   --type-nav-letter-spacing: normal;
-  --type-utility-font-family: lexia, "Roboto Slab", georgia, serif;
+  --type-utility-font-family: Lexia, "Roboto Slab", Georgia, serif;
   --type-utility-font-size: 12px;
   --type-utility-font-weight: 500;
   --type-utility-line-height: 16px;
   --type-utility-letter-spacing: normal;
-  --type-breadcrumb-font-family: inter, arial, sans-serif;
+  --type-breadcrumb-font-family: Inter, Arial, sans-serif;
   --type-breadcrumb-font-size: 14px;
   --type-breadcrumb-font-weight: 400;
   --type-breadcrumb-line-height: 16px;
   --type-breadcrumb-letter-spacing: normal;
-  --type-nav-item-font-family: inter, arial, sans-serif;
+  --type-nav-item-font-family: Inter, Arial, sans-serif;
   --type-nav-item-font-size: 16px;
   --type-nav-item-font-weight: 700;
   --type-nav-item-line-height: 24px;
   --type-nav-item-letter-spacing: normal;
-  --type-caption-font-family: inter, arial, sans-serif;
+  --type-caption-font-family: Inter, Arial, sans-serif;
   --type-caption-font-size: 12px;
   --type-caption-font-weight: 500;
   --type-caption-line-height: 20px;
   --type-caption-letter-spacing: normal;
-  --type-display-mobile-font-family: lexia, "Roboto Slab", georgia, serif;
+  --type-display-mobile-font-family: Lexia, "Roboto Slab", Georgia, serif;
   --type-display-mobile-font-size: 36px;
   --type-display-mobile-font-weight: 400;
   --type-display-mobile-line-height: 40px;
   --type-display-mobile-letter-spacing: normal;
-  --type-accordion-font-family: lexia, "Roboto Slab", georgia, serif;
+  --type-accordion-font-family: Lexia, "Roboto Slab", Georgia, serif;
   --type-accordion-font-size: 36px;
   --type-accordion-font-weight: 400;
   --type-accordion-line-height: 40px;
   --type-accordion-letter-spacing: normal;
-  --type-table-label-font-family: lexia, "Roboto Slab", georgia, serif;
+  --type-table-label-font-family: Lexia, "Roboto Slab", Georgia, serif;
   --type-table-label-font-size: 14px;
   --type-table-label-font-weight: 700;
   --type-table-label-line-height: 16px;
   --type-table-label-letter-spacing: normal;
-  --type-card-tag-font-family: inter, arial, sans-serif;
+  --type-card-tag-font-family: Inter, Arial, sans-serif;
   --type-card-tag-font-size: 18px;
   --type-card-tag-font-weight: 700;
   --type-card-tag-line-height: 28px;
@@ -204,13 +206,13 @@
   --layout-mobile-breadcrumb-padding-y: 6px;
   --layout-mobile-accordion-title-gap: 12px;
   --layout-hero-height: 480px;
-  --layout-hero-overlay: rgb(60 66 66 / 75%);
+  --layout-hero-overlay: rgba(60, 66, 66, 0.75);
   --layout-header-height: 60px;
   --layout-logo-height: 30px;
   --layout-nav-item-padding: 8px 16px;
   --layout-split-media-height: 324px;
   --layout-rule-width: 2px;
-  --layout-cta-border: 4px solid rgb(178 180 180);
+  --layout-cta-border: 4px solid rgb(178, 180, 180);
   --layout-cta-padding: 40px;
   --layout-split-media-height-mobile: 220px;
   --layout-section-padding-y: 40px;
@@ -223,40 +225,40 @@
   --layout-cta-gap: 20px;
   --layout-accordion-title-gap: 20px;
   --layout-nav-align: center;
-  --buttons-primary-background: rgb(208 0 111);
-  --buttons-primary-color: rgb(255 255 255);
-  --buttons-primary-font-family: inter, arial, sans-serif;
+  --buttons-primary-background: rgb(208, 0, 111);
+  --buttons-primary-color: rgb(255, 255, 255);
+  --buttons-primary-font-family: Inter, Arial, sans-serif;
   --buttons-primary-font-size: 16px;
   --buttons-primary-font-weight: 700;
   --buttons-primary-line-height: 24px;
   --buttons-primary-letter-spacing: normal;
   --buttons-primary-border-radius: 4px;
   --buttons-primary-padding: 0px 16px;
-  --buttons-primary-border: 1px solid rgb(208 0 111);
+  --buttons-primary-border: 1px solid rgb(208, 0, 111);
   --buttons-primary-height: 42px;
-  --buttons-secondary-background: rgb(255 255 255);
-  --buttons-secondary-color: rgb(208 0 111);
-  --buttons-secondary-font-family: inter, arial, sans-serif;
+  --buttons-secondary-background: rgb(255, 255, 255);
+  --buttons-secondary-color: rgb(208, 0, 111);
+  --buttons-secondary-font-family: Inter, Arial, sans-serif;
   --buttons-secondary-font-size: 16px;
   --buttons-secondary-font-weight: 700;
   --buttons-secondary-line-height: 24px;
   --buttons-secondary-letter-spacing: normal;
   --buttons-secondary-border-radius: 4px;
   --buttons-secondary-padding: 0px 16px;
-  --buttons-secondary-border: 1px solid rgb(208 0 111);
+  --buttons-secondary-border: 1px solid rgb(208, 0, 111);
   --buttons-secondary-height: 42px;
-  --cards-primary-background: rgb(235 239 238);
+  --cards-primary-background: rgb(235, 239, 238);
   --cards-primary-border-radius: 8px;
   --cards-primary-padding: 24px;
-  --cards-primary-title-color: rgb(208 0 111);
+  --cards-primary-title-color: rgb(208, 0, 111);
   --cards-primary-media-height: 220px;
   --cards-primary-media-height-mobile: 188px;
   --cards-primary-padding-mobile: 16px;
   --radii-card: 8px;
   --radii-button: 4px;
-  --shadows-shadow-0-4-6-0-x2: rgb(0 0 0 / 5%) 0px 4px 6px 0px, rgb(0 0 0 / 10%) 0px 10px 15px 0px;
-  --shadows-shadow-0-2-4-2-x2: rgb(0 0 0 / 5%) 0px 2px 4px -2px, rgb(0 0 0 / 10%) 0px 4px 6px -1px;
-  --shadows-shadow-0-4-6-1-x2: rgb(29 41 61 / 10%) 0px 4px 6px -1px, rgb(29 41 61 / 10%) 0px 2px 4px -2px;
+  --shadows-shadow-0-4-6-0-x2: rgba(0, 0, 0, 0.05) 0px 4px 6px 0px, rgba(0, 0, 0, 0.1) 0px 10px 15px 0px;
+  --shadows-shadow-0-2-4-2-x2: rgba(0, 0, 0, 0.05) 0px 2px 4px -2px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px;
+  --shadows-shadow-0-4-6-1-x2: rgba(29, 41, 61, 0.1) 0px 4px 6px -1px, rgba(29, 41, 61, 0.1) 0px 2px 4px -2px;
 
   /* boilerplate contract names, mapped onto the donor tokens */
   --background-color: var(--palette-page-bg);
@@ -266,6 +268,7 @@
   --heading-font-family: var(--type-display-font-family);
   --nav-height: var(--layout-header-height);
 }
+/* stylelint-enable color-function-notation, color-function-alias-notation, alpha-value-notation, value-keyword-case, comment-empty-line-before, font-family-name-quotes, no-duplicate-selectors, declaration-empty-line-before */
 
 *, *::before, *::after { box-sizing: border-box; }
 
