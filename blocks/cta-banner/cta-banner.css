@@ -57,6 +57,11 @@ main > .section.cta-banner-container > .cta-banner-wrapper {
   margin: 0;
 }
 
+/* copy after the button row keeps the donor's 20px gap below it (Figma 13370:1909) */
+.cta-banner .cta-banner-actions:not(:last-child) {
+  margin-bottom: var(--layout-stack-gap);
+}
+
 @media (width < 900px) {
   .cta-banner .cta-banner-box {
     padding: var(--layout-cta-padding-mobile);

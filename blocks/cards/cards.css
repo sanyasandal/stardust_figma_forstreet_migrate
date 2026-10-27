@@ -88,6 +88,16 @@
   color: var(--palette-body-fg);
 }
 
+/* card tag: the text line between the media and the title (Figma "Event") */
+.cards .card-media + .card-text:has(+ .card-title) {
+  font-family: var(--type-card-tag-font-family);
+  font-size: var(--type-card-tag-font-size);
+  font-weight: var(--type-card-tag-font-weight);
+  font-style: var(--type-card-tag-font-style);
+  line-height: var(--type-card-tag-line-height);
+  letter-spacing: var(--type-card-tag-letter-spacing);
+}
+
 /* a link paragraph with no body after it (social posts): the link is the body */
 .cards .card-link-text a:any-link {
   font-family: var(--type-body-font-family);
