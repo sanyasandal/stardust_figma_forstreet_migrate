@@ -67,8 +67,10 @@
   text-decoration: none;
 }
 
-/* a parent item that has children is ink; its children carry an em-dash prefix */
-.links .links-list li:has(> :is(ul, ol)) > a:any-link {
+/* a parent item that has children is ink; its children carry an em-dash prefix. The delivered
+   list wraps an item's link in a <p> (li > p > a, deploy #98), the harness does not (li > a). */
+.links .links-list li:has(> :is(ul, ol)) > a:any-link,
+.links .links-list li:has(> :is(ul, ol)) > p > a:any-link {
   color: var(--palette-body-fg);
 }
 
