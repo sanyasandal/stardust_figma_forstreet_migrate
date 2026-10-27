@@ -29,7 +29,9 @@
 }
 
 .accordion .accordion-glyph {
-  display: none;
+  /* the source's icon-font ligature word stays in innerText (the content gate counts it); the
+     chevron button draws the icon */
+  font-size: 0;
 }
 
 /* chevron-only toggle, vertically centred on the first title line */
