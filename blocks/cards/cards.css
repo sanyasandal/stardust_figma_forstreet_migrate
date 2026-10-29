@@ -50,12 +50,14 @@
 }
 
 /* a fixed 220px height cut 736x600 uniform photos to 74% where the source showed 100% (content
-   gate § Image crop). Each image keeps its own ratio; a grid whose images share a shape
-   (cards.js .cards-media-sized) takes one frame at the median image's ratio, in whole pixels. */
+   gate § Image crop). Each image keeps its own ratio, capped at a 2:3 portrait (a 9:16 story post
+   would stretch its row to 650px); a grid whose images share a shape (cards.js
+   .cards-media-sized) takes one frame at the median image's ratio, in whole pixels. */
 .cards .card-media img {
   display: block;
   width: 100%;
   height: auto;
+  max-height: 150cqi;
   object-fit: cover;
 }
 
