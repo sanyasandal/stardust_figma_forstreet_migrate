@@ -14,6 +14,7 @@
 .teaser .teaser-media {
   align-self: start;
   min-width: 0;
+  container-type: inline-size;
 }
 
 .teaser .teaser-media picture,
@@ -22,8 +23,12 @@
   width: 100%;
 }
 
+/* the image keeps its own ratio (the delivered width/height attributes), capped at a 2:3 portrait:
+   the Figma frame (574x324) is the 16:9 placeholder's shape, and a fixed height cut a square
+   portrait to 56% of its area where the source showed 96% (content gate § Image crop) */
 .teaser .teaser-media img {
-  height: var(--layout-split-media-height);
+  height: auto;
+  max-height: 150cqi;
   max-width: none;
   object-fit: cover;
 }
@@ -70,9 +75,5 @@
 
   .teaser .teaser-media {
     order: -1;
-  }
-
-  .teaser .teaser-media img {
-    height: var(--layout-split-media-height-mobile);
   }
 }
