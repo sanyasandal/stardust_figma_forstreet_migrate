@@ -51,7 +51,8 @@ function mediaRatio(block) {
   const [w, h] = sizes[Math.floor((sizes.length - 1) / 2)];
   const median = w / h;
   const shared = sizes.every(([iw, ih]) => Math.abs(iw / ih / median - 1) <= SHAPE_BAND);
-  return shared ? [w, h] : null;
+  if (!shared) return null;
+  return median < 2 / 3 ? [2, 3] : [w, h]; // the same 2:3 portrait cap as an image on its own
 }
 
 // #62/#104 cell-level collector, scoped to one row: expands a media-led cell that the
