@@ -42,17 +42,25 @@
 /* media: full-bleed image at the card top */
 .cards .card > .card-media {
   margin: 0 0 calc(var(--cards-primary-padding) - var(--layout-stack-gap));
+  container-type: inline-size;
 }
 
 .cards .card-media picture {
   display: block;
 }
 
+/* a fixed 220px height cut 736x600 uniform photos to 74% where the source showed 100% (content
+   gate § Image crop). Each image keeps its own ratio; a grid whose images share a shape
+   (cards.js .cards-media-sized) takes one frame at the median image's ratio, in whole pixels. */
 .cards .card-media img {
   display: block;
   width: 100%;
-  height: var(--cards-primary-media-height);
+  height: auto;
   object-fit: cover;
+}
+
+.cards.cards-media-sized .card-media img {
+  height: round(calc(100cqi * var(--cards-media-h) / var(--cards-media-w)), 1px);
 }
 
 /* title: the first link paragraph followed by body text (or a heading) */
@@ -182,9 +190,5 @@
 
   .cards .card:has(> .card-media) > .card-media {
     margin: 0;
-  }
-
-  .cards .card-media img {
-    height: var(--cards-primary-media-height-mobile);
   }
 }
