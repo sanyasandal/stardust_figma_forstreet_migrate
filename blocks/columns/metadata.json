@@ -1,0 +1,17 @@
+{
+  "variantName": "columns",
+  "name": "Columns",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-10-27T17:49:00.707Z",
+  "description": "Boilerplate columns: side-by-side cells per row. Not restyled to oneAZ and unused on the migrated site.",
+  "visualCharacteristics": {
+    "purpose": "layout",
+    "imagePattern": "mixed"
+  },
+  "contentPattern": {
+    "structure": "one row, two or more side-by-side cells",
+    "buttonCount": 0,
+    "imageCount": 1
+  }
+}

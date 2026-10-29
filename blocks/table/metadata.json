@@ -1,0 +1,39 @@
+{
+  "variantName": "table",
+  "name": "Table",
+  "baseBlock": "table",
+  "version": "1.0.0",
+  "created": "2026-10-27T17:49:00.707Z",
+  "description": "oneAZ M18 Table: one row per table row, the first row being the header row.",
+  "visualCharacteristics": {
+    "density": "comfortable",
+    "purpose": "data-table",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "one row per table row; the first row is the header row",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "variants": [
+    "no-header"
+  ],
+  "usage": {
+    "pagesUsing": [
+      "learning-and-support/wellbeing",
+      "about-us/hsc-results",
+      "about-us/our-principal-and-staff",
+      "our-community/foundation",
+      "our-community/pandc",
+      "school-life/events",
+      "school-life/forms",
+      "school-life/lockers-and-lost-property",
+      "school-life/student-opportunities-and-activities",
+      "school-life/student-opportunities-and-activities/duke-of-edinburgh-award",
+      "school-life/student-opportunities-and-activities/sport",
+      "school-life/travel-to-school",
+      "school-life/uniform/uniform-shop"
+    ],
+    "reuseCount": 13
+  }
+}

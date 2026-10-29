@@ -1,0 +1,25 @@
+{
+  "variantName": "hero",
+  "name": "Hero",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-10-27T17:49:00.707Z",
+  "description": "oneAZ M31 Home hero: a full-bleed image row, then a heading, lede and primary CTA over a dark overlay.",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "page-hero",
+    "imagePattern": "background"
+  },
+  "contentPattern": {
+    "structure": "row 1: image; row 2: heading, lede, primary CTA",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "usage": {
+    "pagesUsing": [
+      "index"
+    ],
+    "reuseCount": 1
+  }
+}
