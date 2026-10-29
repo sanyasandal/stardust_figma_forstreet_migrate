@@ -1,0 +1,11 @@
+{
+  "runtime": "vanilla-eds",
+  "probedFrom": ["scripts/scripts.js", "scripts/aem.js"],
+  "probedAt": "2026-10-27",
+  "blockWrapperClass": "block",
+  "buttonClasses": ".button / .button.primary / .button.secondary / .button.accent, in p.button-wrapper",
+  "buttonization": "formatted-only",
+  "wrapTextNodes": true,
+  "fragmentScriptPolicy": "inert-innerHTML",
+  "emptySectionCollapse": true
+}

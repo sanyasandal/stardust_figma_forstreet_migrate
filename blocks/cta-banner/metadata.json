@@ -1,0 +1,62 @@
+{
+  "variantName": "cta-banner",
+  "name": "CTA Banner",
+  "baseBlock": "cta-banner",
+  "version": "1.0.0",
+  "created": "2026-10-27T17:49:00.707Z",
+  "description": "oneAZ M23 CTA banner: a bordered box with an optional image, heading, copy and a primary button (bold link).",
+  "visualCharacteristics": {
+    "density": "comfortable",
+    "purpose": "call-to-action",
+    "imagePattern": "thumbnail-left"
+  },
+  "contentPattern": {
+    "structure": "single cell: optional image, heading, copy, primary CTA",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "usage": {
+    "pagesUsing": [
+      "school-life/bell-times",
+      "learning-and-support/wellbeing",
+      "about-us/enrol",
+      "about-us/our-principal-and-staff",
+      "about-us/policies-and-reports",
+      "about-us/policies-and-reports/nsw-public-school-information",
+      "about-us/school-history-and-archives",
+      "about-us/school-history-and-archives/fort-street-archives",
+      "about-us/school-history-and-archives/the-fort-street-museum",
+      "about-us/school-history-and-archives/the-fortian-digitised",
+      "about-us/stories-and-highlights",
+      "about-us/transition-to-high-school",
+      "about-us/why-choose-us",
+      "contact-us",
+      "learning-and-support/additional-learning-support",
+      "learning-and-support/careers",
+      "learning-and-support/high-potential-and-gifted-education",
+      "our-community",
+      "our-community/alumni",
+      "our-community/foundation",
+      "our-community/pandc",
+      "school-life/bring-your-own-device",
+      "school-life/events",
+      "school-life/forms",
+      "school-life/house-and-merit-system",
+      "school-life/lockers-and-lost-property",
+      "school-life/newsletters",
+      "school-life/parent-portal",
+      "school-life/student-opportunities-and-activities",
+      "school-life/student-opportunities-and-activities/academic-competitions",
+      "school-life/student-opportunities-and-activities/clubs-and-committees",
+      "school-life/student-opportunities-and-activities/creative-and-performing-arts",
+      "school-life/student-opportunities-and-activities/debating-and-public-speaking",
+      "school-life/student-opportunities-and-activities/duke-of-edinburgh-award",
+      "school-life/student-opportunities-and-activities/instrumental-music-program",
+      "school-life/student-opportunities-and-activities/robotics-and-maker-society",
+      "school-life/student-opportunities-and-activities/sport",
+      "school-life/travel-to-school",
+      "school-life/uniform"
+    ],
+    "reuseCount": 39
+  }
+}

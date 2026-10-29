@@ -1,20 +1,165 @@
+/* footer — oneAZ M27: white, top hairline, 1180 container; brand column 300 + link columns
+   (Inter 16/24 ink); social row in caption type */
 footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
+  padding: calc(var(--layout-section-padding-y) * 2) 0;
+  border-top: 1px solid var(--palette-hairline);
+  background: var(--palette-page-bg);
+  color: var(--palette-body-fg);
 }
 
-footer .footer > div {
-  margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
+footer .footer-root {
+  box-sizing: content-box;
+  max-width: var(--layout-container-max-width);
+  margin: 0 auto;
+  padding: var(--layout-container-padding);
+  font-family: var(--type-body-font-family);
+  font-size: var(--type-body-font-size);
+  line-height: var(--type-body-line-height);
 }
 
-footer .footer p {
+footer .footer-root a:any-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+footer .footer-root a:any-link:hover {
+  text-decoration: underline;
+}
+
+footer .footer-root p {
+  margin: 0 0 var(--layout-stack-gap);
+}
+
+footer .footer-root ul {
+  display: flow-root;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+footer .footer-root li {
+  margin: 0 0 var(--layout-stack-gap);
+}
+
+footer .footer-main {
+  display: flex;
+  gap: var(--layout-column-gap);
+}
+
+footer .footer-brand {
+  /* = 300px, the M27 brand column (1180 / 3.9333) */
+  flex: 0 0 calc(var(--layout-container-max-width) / 3.9333);
+  min-width: 0;
+}
+
+footer .footer-col {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+footer .footer-logo {
+  margin: 0 0 calc(var(--layout-stack-gap) * 1.5);
+}
+
+footer .footer-logo p {
+  margin: 0;
+  line-height: 0;
+}
+
+footer .footer-logo img {
+  width: auto;
+  height: calc(var(--layout-stack-gap) * 3);
+}
+
+footer .footer-name {
+  margin: 0 0 var(--layout-stack-gap);
+  font-family: var(--type-h4-font-family);
+  font-size: var(--type-h4-font-size);
+  font-weight: var(--type-h4-font-weight);
+  line-height: var(--type-h4-line-height);
+  color: var(--palette-heading-fg);
+}
+
+footer .footer-col-title {
+  margin: 0 0 var(--layout-stack-gap);
+  font-family: var(--type-body-font-family);
+  font-size: var(--type-body-font-size);
+  font-weight: var(--type-nav-item-font-weight);
+  line-height: var(--type-body-line-height);
+  color: var(--palette-body-fg);
+}
+
+footer .footer-social-label {
+  font-family: var(--type-caption-font-family);
+  font-size: var(--type-caption-font-size);
+  font-weight: var(--type-caption-font-weight);
+  line-height: var(--type-caption-line-height);
+  color: var(--palette-body-fg);
+}
+
+footer :is(.footer-name, .footer-col-title, .footer-social-label) :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+  font: inherit;
+  color: inherit;
+}
+
+/* social row: label + icon links, caption type */
+footer .footer-social {
+  display: flex;
+  align-items: center;
+  gap: var(--layout-stack-gap);
+  margin-top: var(--layout-column-gap);
+  font-family: var(--type-caption-font-family);
+  font-size: var(--type-caption-font-size);
+  font-weight: var(--type-caption-font-weight);
+  line-height: var(--type-caption-line-height);
+}
+
+footer .footer-social p {
   margin: 0;
 }
 
-@media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
+footer .footer-social ul {
+  display: flex;
+  gap: var(--layout-stack-gap);
+}
+
+footer .footer-social a.social-icon:any-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--layout-stack-gap) * 2);
+  height: calc(var(--layout-stack-gap) * 2);
+  font-size: 0;
+}
+
+footer .footer-social a.social-icon svg {
+  width: calc(var(--layout-stack-gap) * 1.5);
+  height: calc(var(--layout-stack-gap) * 1.5);
+  fill: currentcolor;
+}
+
+@media (width < 900px) {
+  footer .footer-root {
+    padding: 0 var(--layout-mobile-gutter);
+    text-align: center;
+  }
+
+  footer .footer-main {
+    flex-direction: column;
+  }
+
+  footer .footer-brand {
+    flex: none;
+  }
+
+  footer .footer-logo img {
+    margin: 0 auto;
+  }
+
+  footer .footer-social {
+    justify-content: center;
+    margin-top: calc(var(--layout-stack-gap) * 1.5);
+    white-space: nowrap;
   }
 }

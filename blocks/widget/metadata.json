@@ -1,0 +1,13 @@
+{
+  "variantName": "widget",
+  "name": "Widget",
+  "baseBlock": "widget",
+  "version": "1.0.0",
+  "created": "2026-10-27T17:49:00.707Z",
+  "visualCharacteristics": {
+    "purpose": "embed"
+  },
+  "contentPattern": {
+    "structure": "single cell: a link to /widgets/<path>/<name>.html"
+  }
+}

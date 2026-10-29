@@ -1,0 +1,36 @@
+{
+  "variantName": "teaser",
+  "name": "Teaser",
+  "baseBlock": "teaser",
+  "version": "1.0.0",
+  "created": "2026-10-27T17:49:00.707Z",
+  "description": "oneAZ M31b Text + image: one row with two cells in source order; image first puts the image on the left.",
+  "visualCharacteristics": {
+    "density": "comfortable",
+    "purpose": "text-and-image",
+    "imagePattern": "side-image"
+  },
+  "contentPattern": {
+    "structure": "one row, two cells in source order (image first = image left)",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "usage": {
+    "pagesUsing": [
+      "index",
+      "about-us/enrol",
+      "about-us/facilities-and-resources",
+      "about-us/our-principal-and-staff",
+      "about-us/transition-to-high-school",
+      "contact-us",
+      "learning-and-support/additional-learning-support",
+      "our-community/foundation",
+      "school-life/events",
+      "school-life/newsletters",
+      "school-life/parent-portal",
+      "school-life/student-opportunities-and-activities/instrumental-music-program",
+      "school-life/travel-to-school"
+    ],
+    "reuseCount": 13
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "variantName": "accordion",
+  "name": "Accordion",
+  "baseBlock": "accordion",
+  "version": "1.0.0",
+  "created": "2026-10-27T17:49:00.707Z",
+  "description": "oneAZ M1 Accordion: one row per item, a title cell and a panel cell; panels start closed. A table inside a panel is authored as a /fragments/ link the block loads.",
+  "visualCharacteristics": {
+    "density": "spacious",
+    "purpose": "disclosure",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "title-panel-expandable (one row per item: title cell, panel cell)",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "usage": {
+    "pagesUsing": [
+      "learning-and-support/wellbeing",
+      "about-us/enrol",
+      "about-us/policies-and-reports",
+      "about-us/school-history-and-archives/the-fortian-digitised",
+      "learning-and-support/additional-learning-support",
+      "learning-and-support/high-potential-and-gifted-education",
+      "learning-and-support/learning",
+      "our-community/pandc",
+      "school-life/newsletters",
+      "school-life/student-opportunities-and-activities",
+      "school-life/student-opportunities-and-activities/duke-of-edinburgh-award",
+      "school-life/student-opportunities-and-activities/student-leadership-opportunities",
+      "school-life/uniform"
+    ],
+    "reuseCount": 13
+  }
+}

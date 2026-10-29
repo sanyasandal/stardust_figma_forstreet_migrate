@@ -1,0 +1,73 @@
+/* breadcrumbs — M4 Breadcrumb (renderers/oneaz.mjs § M4). Donor tokens only. */
+
+/* beats the foundation's "first section after an empty metadata section" reset */
+main > .section.breadcrumbs-container,
+main .section:first-of-type:empty + .section.breadcrumbs-container {
+  padding-top: var(--layout-breadcrumb-padding-y);
+  padding-bottom: var(--layout-breadcrumb-padding-y);
+}
+
+.breadcrumbs .breadcrumbs-trail ul {
+  display: block;
+  min-height: var(--layout-breadcrumb-separator);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--type-breadcrumb-font-family);
+  font-size: var(--type-breadcrumb-font-size);
+  line-height: var(--type-breadcrumb-line-height);
+  color: var(--palette-body-fg);
+}
+
+/* inline-block, not flex: the trail's innerText must stay tight-joined */
+.breadcrumbs .breadcrumbs-trail li {
+  display: inline-block;
+  vertical-align: top;
+  line-height: var(--layout-breadcrumb-separator);
+}
+
+.breadcrumbs .breadcrumbs-trail li + li::before {
+  content: "";
+  display: inline-block;
+  width: var(--layout-breadcrumb-separator);
+  height: var(--layout-breadcrumb-separator);
+  margin: 0 var(--layout-breadcrumb-gap);
+  vertical-align: top;
+  background: var(--palette-body-fg);
+  clip-path: polygon(40% 30%, 65% 50%, 40% 70%);
+}
+
+/* any-link + the href-less current-page placeholder */
+.breadcrumbs .breadcrumbs-trail a {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: var(--type-breadcrumb-line-height);
+  color: var(--palette-body-fg);
+  text-decoration: none;
+}
+
+/* the current page: accent, whether authored as plain text or as a link */
+.breadcrumbs .breadcrumbs-trail li:last-child,
+.breadcrumbs .breadcrumbs-trail li:last-child a {
+  color: var(--palette-accent);
+}
+
+@media (width <= 900px) {
+  main > .section.breadcrumbs-container,
+  main .section:first-of-type:empty + .section.breadcrumbs-container {
+    padding-top: var(--layout-mobile-breadcrumb-padding-y);
+    padding-bottom: var(--layout-mobile-breadcrumb-padding-y);
+  }
+
+  .breadcrumbs .breadcrumbs-trail ul {
+    font-size: var(--type-body-small-font-size);
+  }
+
+  .breadcrumbs .breadcrumbs-trail a {
+    line-height: var(--type-body-small-line-height);
+  }
+
+  .breadcrumbs .breadcrumbs-trail li + li::before {
+    margin: 0 2px;
+  }
+}

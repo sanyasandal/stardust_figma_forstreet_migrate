@@ -1,0 +1,69 @@
+/* cta-banner — M23 CTA Banner (oneAZ v3.2). Every value is a donor token (var(--…)). */
+
+/* full-width like the reskin page (its M23 container has max-width none, padding 0) */
+main > .section.cta-banner-container > .cta-banner-wrapper {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cta-banner .cta-banner-box {
+  padding: var(--layout-cta-padding);
+  border: var(--layout-cta-border);
+  border-radius: var(--radii-card);
+  background: var(--palette-page-bg);
+  color: var(--palette-body-fg);
+}
+
+.cta-banner .cta-banner-box.cta-banner-has-media {
+  display: grid;
+  grid-template-columns: var(--layout-cta-media-size) minmax(0, 1fr);
+  column-gap: var(--layout-cta-gap);
+  align-items: start;
+}
+
+.cta-banner .cta-banner-media picture,
+.cta-banner .cta-banner-media img {
+  display: block;
+  width: var(--layout-cta-media-size);
+  height: var(--layout-cta-media-size);
+  max-width: none;
+  object-fit: cover;
+}
+
+.cta-banner .cta-banner-body :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0 0 var(--layout-stack-gap);
+  font-family: var(--type-h3-font-family);
+  font-size: var(--type-h3-font-size);
+  font-weight: var(--type-h3-font-weight);
+  line-height: var(--type-h3-line-height);
+  color: var(--palette-heading-fg);
+}
+
+.cta-banner .cta-banner-body p:where(:not(.cta-banner-actions p)) {
+  margin: 0 0 var(--layout-stack-gap);
+  font-size: var(--type-body-font-size);
+  line-height: var(--type-body-line-height);
+}
+
+.cta-banner .cta-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--layout-stack-gap);
+  margin: var(--layout-stack-gap) 0 0;
+}
+
+.cta-banner .cta-banner-actions p {
+  margin: 0;
+}
+
+/* copy after the button row keeps the donor's 20px gap below it (Figma 13370:1909) */
+.cta-banner .cta-banner-actions:not(:last-child) {
+  margin-bottom: var(--layout-stack-gap);
+}
+
+@media (width < 900px) {
+  .cta-banner .cta-banner-box {
+    padding: var(--layout-cta-padding-mobile);
+  }
+}

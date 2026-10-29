@@ -1,0 +1,78 @@
+/* teaser — M31b Teaser / Text + Image (oneAZ v3.2). Every value is a donor token (var(--…)). */
+
+.teaser .teaser-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--layout-split-gap);
+  align-items: stretch;
+}
+
+.teaser .teaser-panel + .teaser-panel {
+  margin-top: var(--layout-section-padding-y);
+}
+
+.teaser .teaser-media {
+  align-self: start;
+  min-width: 0;
+}
+
+.teaser .teaser-media picture,
+.teaser .teaser-media img {
+  display: block;
+  width: 100%;
+}
+
+.teaser .teaser-media img {
+  height: var(--layout-split-media-height);
+  max-width: none;
+  object-fit: cover;
+}
+
+.teaser .teaser-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.teaser .teaser-body :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0 0 var(--layout-stack-gap);
+  font-family: var(--type-h3-font-family);
+  font-size: var(--type-h3-font-size);
+  font-weight: var(--type-h3-font-weight);
+  line-height: var(--type-h3-line-height);
+  color: var(--palette-heading-fg);
+}
+
+.teaser .teaser-body p:where(:not(.teaser-actions p)) {
+  margin: 0 0 var(--layout-stack-gap);
+  font-size: var(--type-body-large-font-size);
+  line-height: var(--type-body-large-line-height);
+}
+
+.teaser .teaser-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--layout-stack-gap);
+  margin-top: auto;
+  padding-top: var(--layout-stack-gap);
+}
+
+.teaser .teaser-actions p {
+  margin: 0;
+}
+
+@media (width < 900px) {
+  .teaser .teaser-panel {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--layout-stack-gap);
+  }
+
+  .teaser .teaser-media {
+    order: -1;
+  }
+
+  .teaser .teaser-media img {
+    height: var(--layout-split-media-height-mobile);
+  }
+}

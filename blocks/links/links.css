@@ -1,0 +1,79 @@
+/* links — M10 Links, in-page nav (renderers/oneaz.mjs § M10). Donor tokens only. */
+
+/* the heading labels the nav for assistive tech; visually hidden */
+.links .links-heading {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.links .links-heading :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+}
+
+/* a top-level link paragraph (e.g. the section landing page) */
+.links .links-parent p {
+  margin: 0;
+}
+
+.links .links-parent a:any-link {
+  display: block;
+  padding: calc(var(--layout-stack-gap) / 4) var(--layout-stack-gap);
+  border: 0;
+  border-left: var(--layout-rule-width) solid var(--palette-rule-fg);
+  font-family: var(--type-nav-item-font-family);
+  font-size: var(--type-nav-item-font-size);
+  font-weight: var(--type-nav-item-font-weight);
+  line-height: var(--type-nav-item-line-height);
+  color: var(--palette-body-fg);
+  text-decoration: none;
+}
+
+/* older runtimes buttonize every lone link: the parent link is never a button */
+.links .links-parent a.button {
+  height: auto;
+  min-height: 0;
+  border-radius: 0;
+  background: none;
+}
+
+.links .links-list ul,
+.links .links-list ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-left: var(--layout-rule-width) solid var(--palette-rule-fg);
+  font-family: var(--type-nav-item-font-family);
+  font-size: var(--type-nav-item-font-size);
+  font-weight: var(--type-nav-item-font-weight);
+  line-height: var(--type-nav-item-line-height);
+}
+
+/* nested lists sit inside the parent item's rule */
+.links .links-list li :is(ul, ol) {
+  border-left: 0;
+}
+
+.links .links-list a:any-link {
+  display: block;
+  padding: calc(var(--layout-stack-gap) / 4) var(--layout-stack-gap);
+  color: var(--palette-accent);
+  text-decoration: none;
+}
+
+/* a parent item that has children is ink; its children carry an em-dash prefix. The delivered
+   list wraps an item's link in a <p> (li > p > a, deploy #98), the harness does not (li > a). */
+.links .links-list li:has(> :is(ul, ol)) > a:any-link,
+.links .links-list li:has(> :is(ul, ol)) > p > a:any-link {
+  color: var(--palette-body-fg);
+}
+
+.links .links-list li li a:any-link::before {
+  content: "— ";
+}

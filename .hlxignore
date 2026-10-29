@@ -6,3 +6,7 @@ package.json
 package-lock.json
 test/*
 sync-block-collection.sh
+stardust/
+.benchmark/
+content/
+DESIGN.json

@@ -1,27 +1,190 @@
-.cards > ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+/* cards — M31c Teaser / Card (renderers/oneaz.mjs § M31c). Donor tokens only. */
+
+/* the section head (default content before the block) keeps the foundation h2 */
+.cards-container .default-content-wrapper + .cards-wrapper {
+  margin-top: var(--layout-section-padding-y);
+}
+
+.cards .cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--layout-column-gap);
+  margin: 0;
 }
 
-.cards > ul > li {
-  border: 1px solid #dadada;
-  background-color: var(--background-color);
+.cards .cards-grid.cards-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.cards .cards-card-body {
-  margin: 16px;
+.cards .card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--layout-stack-gap);
+  padding: 0 0 var(--cards-primary-padding);
+  overflow: hidden;
+  border-radius: var(--cards-primary-border-radius);
+  background: var(--cards-primary-background);
+  color: var(--palette-body-fg);
 }
 
-.cards .cards-card-image {
-  line-height: 0;
+.cards .card:has(> .card-media) {
+  padding-bottom: calc(var(--cards-primary-padding) + var(--layout-stack-gap) / 2);
 }
 
-.cards > ul > li img {
+.cards .card > * {
+  margin: 0 var(--cards-primary-padding);
+}
+
+.cards .card :is(p, ul, ol, h2, h3, h4) {
+  margin: 0;
+}
+
+/* media: full-bleed image at the card top */
+.cards .card > .card-media {
+  margin: 0 0 calc(var(--cards-primary-padding) - var(--layout-stack-gap));
+}
+
+.cards .card-media picture {
+  display: block;
+}
+
+.cards .card-media img {
+  display: block;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  height: var(--cards-primary-media-height);
   object-fit: cover;
+}
+
+/* title: the first link paragraph followed by body text (or a heading) */
+.cards .card-media + .card-title p,
+.cards .card-text,
+.cards .card-link-text {
+  font-size: var(--type-body-large-font-size);
+  line-height: var(--type-body-large-line-height);
+}
+
+.cards .card-title a:any-link,
+.cards .card-title :is(h2, h3, h4) {
+  font-family: var(--type-h3-font-family);
+  font-size: var(--type-h3-font-size);
+  font-weight: var(--type-h3-font-weight);
+  line-height: var(--type-h3-line-height);
+  color: var(--cards-primary-title-color);
+  text-decoration: none;
+}
+
+/* older runtimes buttonize every lone link: a title / link-text is never a button */
+.cards :is(.card-title, .card-link-text) a.button {
+  display: inline;
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+
+.cards .card-text {
+  color: var(--palette-body-fg);
+}
+
+/* card tag: the text line between the media and the title (Figma "Event") */
+.cards .card-media + .card-text:has(+ .card-title) {
+  font-family: var(--type-card-tag-font-family);
+  font-size: var(--type-card-tag-font-size);
+  font-weight: var(--type-card-tag-font-weight);
+  font-style: var(--type-card-tag-font-style);
+  line-height: var(--type-card-tag-line-height);
+  letter-spacing: var(--type-card-tag-letter-spacing);
+}
+
+/* a link paragraph with no body after it (social posts): the link is the body */
+.cards .card-link-text a:any-link {
+  font-family: var(--type-body-font-family);
+  font-size: inherit;
+  color: var(--palette-body-fg);
+  text-decoration: none;
+}
+
+.cards .card > .card-actions {
+  margin-top: auto;
+}
+
+/* the "east" glyph word: kept as content bytes, drawn as a CSS arrow (D-EDS-2) */
+.cards .card > .card-arrow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-top: auto;
+  color: var(--palette-accent);
+  font-size: 0;
+}
+
+.cards .card-arrow::before {
+  content: "";
+  position: absolute;
+  right: 6px;
+  width: 9px;
+  height: 9px;
+  border: solid currentcolor;
+  border-width: 0 2px 2px 0;
+  transform: rotate(-45deg);
+}
+
+.cards .card-arrow::after {
+  content: "";
+  position: absolute;
+  top: 13px;
+  right: 5px;
+  left: 4px;
+  height: 2px;
+  background: currentcolor;
+}
+
+.cards .cards-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (width <= 900px) {
+  .cards .cards-grid,
+  .cards .cards-grid.cards-cols-2 {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--layout-stack-gap);
+  }
+
+  .cards .card {
+    padding-bottom: var(--cards-primary-padding-mobile);
+  }
+
+  .cards .card > * {
+    margin: 0 var(--cards-primary-padding-mobile);
+  }
+
+  /* media-led cards keep the desktop inline padding (as the reskin page does) */
+  .cards .card:has(> .card-media) {
+    padding-bottom: calc(var(--cards-primary-padding) + var(--layout-stack-gap) / 2);
+  }
+
+  .cards .card:has(> .card-media) > * {
+    margin: 0 var(--cards-primary-padding);
+  }
+
+  .cards .card:has(> .card-media) > .card-media {
+    margin: 0;
+  }
+
+  .cards .card-media img {
+    height: var(--cards-primary-media-height-mobile);
+  }
 }

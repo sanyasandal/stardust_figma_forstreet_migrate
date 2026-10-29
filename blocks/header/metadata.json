@@ -1,0 +1,13 @@
+{
+  "variantName": "header",
+  "name": "Header",
+  "baseBlock": "header",
+  "version": "1.0.0",
+  "created": "2026-10-27T17:49:00.707Z",
+  "visualCharacteristics": {
+    "purpose": "site-chrome"
+  },
+  "contentPattern": {
+    "structure": "not authored: decorate() loads the /nav document"
+  }
+}

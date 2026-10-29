@@ -1,49 +1,28 @@
+/**
+ * header — oneAZ M28 Header (template-slotted chrome over the authored /nav document).
+ *
+ * Authoring shape (content/nav.html, stock 3-section nav contract):
+ *   section 1 — brand: <p><a href="/"><img logo></a></p>, <p>school name</p>, <p>motto</p>
+ *   section 2 — sections: <ul><li><a>…</a></li>…</ul> (a nested <ul> makes a dropdown)
+ *   section 3 — tools (may be empty)
+ * One 60px row inside the 1180 container: brand left (logo + name + motto), menu links right,
+ * hairline below. Below 900px a hamburger opens the menu as a panel under the row.
+ * The stock toggleMenu / aria-expanded / Escape / focus-out machinery is kept.
+ * Nav decode (#98): the pipeline wraps each item's trigger link in a <p> on live, so the
+ * trigger lookup matches `:scope > a, :scope > p > a` and the <p> is unwrapped.
+ */
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
 
-/**
- * Closes the open nav dropdown (desktop) or the nav menu (mobile) on Escape
- * @param {KeyboardEvent} e keydown event
- */
-function closeOnEscape(e) {
-  if (e.code === 'Escape') {
-    const nav = document.getElementById('nav');
-    const navSections = nav.querySelector('.nav-sections');
-    if (!navSections) return;
-    const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
-    if (navSectionExpanded && isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleAllNavSections(navSections);
-      navSectionExpanded.focus();
-    } else if (!isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleMenu(nav, navSections);
-      nav.querySelector('button').focus();
-    }
-  }
-}
-
-/**
- * Closes the open nav dropdown (desktop) or the nav menu (mobile) when focus leaves the nav
- * @param {FocusEvent} e focusout event
- */
-function closeOnFocusLost(e) {
-  const nav = e.currentTarget;
-  if (!nav.contains(e.relatedTarget)) {
-    const navSections = nav.querySelector('.nav-sections');
-    if (!navSections) return;
-    const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
-    if (navSectionExpanded && isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleAllNavSections(navSections, false);
-    } else if (!isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleMenu(nav, navSections, false);
-    }
-  }
+/** Wraps an AUTHORED element in a generated wrapper (the element moves, EW1). */
+function wrapNode(node, className) {
+  const w = document.createElement('div');
+  w.className = className;
+  w.append(node);
+  return w;
 }
 
 /**
@@ -74,16 +53,111 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
 
-  // enable menu collapse on escape keypress
+  // eslint-disable-next-line no-use-before-define
+  const listeners = [closeOnEscape, closeOnFocusLost];
   if (!expanded || isDesktop.matches) {
-    // collapse menu on escape press
-    window.addEventListener('keydown', closeOnEscape);
-    // collapse menu on focus lost
-    nav.addEventListener('focusout', closeOnFocusLost);
+    window.addEventListener('keydown', listeners[0]);
+    nav.addEventListener('focusout', listeners[1]);
   } else {
-    window.removeEventListener('keydown', closeOnEscape);
-    nav.removeEventListener('focusout', closeOnFocusLost);
+    window.removeEventListener('keydown', listeners[0]);
+    nav.removeEventListener('focusout', listeners[1]);
   }
+}
+
+/**
+ * Closes the open nav dropdown (desktop) or the nav menu (mobile) on Escape
+ * @param {KeyboardEvent} e keydown event
+ */
+function closeOnEscape(e) {
+  if (e.code !== 'Escape') return;
+  const nav = document.getElementById('nav');
+  if (!nav) return;
+  const navSections = nav.querySelector('.nav-sections');
+  const navSectionExpanded = navSections && navSections.querySelector('[aria-expanded="true"]');
+  if (navSectionExpanded && isDesktop.matches) {
+    toggleAllNavSections(navSections);
+    navSectionExpanded.focus();
+  } else if (!isDesktop.matches && nav.getAttribute('aria-expanded') === 'true') {
+    toggleMenu(nav, navSections);
+    nav.querySelector('.nav-hamburger button').focus();
+  }
+}
+
+/**
+ * Closes the open nav dropdown (desktop) or the nav menu (mobile) when focus leaves the nav
+ * @param {FocusEvent} e focusout event
+ */
+function closeOnFocusLost(e) {
+  const nav = e.currentTarget;
+  if (nav.contains(e.relatedTarget)) return;
+  const navSections = nav.querySelector('.nav-sections');
+  const navSectionExpanded = navSections && navSections.querySelector('[aria-expanded="true"]');
+  if (navSectionExpanded && isDesktop.matches) {
+    toggleAllNavSections(navSections, false);
+  } else if (!isDesktop.matches) {
+    toggleMenu(nav, navSections, false);
+  }
+}
+
+/**
+ * Brand slot: logo + school name + motto, classified by content (not position).
+ * @param {Element} navBrand the brand section
+ */
+function decorateBrand(navBrand) {
+  const host = navBrand.querySelector('.default-content-wrapper') || navBrand;
+  const els = [...host.children];
+  const logo = els.find((el) => el.matches('picture, img') || el.querySelector('picture, img'));
+  const texts = els.filter((el) => el !== logo && el.textContent.trim());
+  const row = document.createElement('div');
+  row.className = 'brand-row';
+  if (logo) {
+    const link = logo.querySelector('a');
+    if (link) link.classList.remove('button');
+    row.append(wrapNode(logo, 'brand-logo'));
+  }
+  if (texts.length) {
+    const brandText = document.createElement('div');
+    brandText.className = 'brand-text';
+    brandText.append(wrapNode(texts[0], 'brand-name'));
+    texts.slice(1).forEach((el) => brandText.append(wrapNode(el, 'brand-motto')));
+    row.append(brandText);
+  }
+  host.prepend(row);
+}
+
+/**
+ * Sections slot: normalise the delivered <li><p><a> shape (#98) and wire dropdowns.
+ * @param {Element} navSections the sections section
+ */
+function decorateSections(navSections) {
+  navSections.querySelectorAll('li').forEach((li) => {
+    const p = li.querySelector(':scope > p');
+    if (p && p.querySelector(':scope > a')) p.replaceWith(...p.childNodes);
+  });
+  navSections.querySelectorAll('a.button').forEach((a) => a.classList.remove('button'));
+  navSections.querySelectorAll('.button-wrapper').forEach((p) => p.classList.remove('button-wrapper'));
+
+  navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
+    const subList = navSection.querySelector(':scope > ul');
+    if (!subList) return;
+    navSection.classList.add('nav-drop');
+    // wrap the dropdown label in a button so it is announced as expandable
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.setAttribute('aria-expanded', false);
+    [...navSection.childNodes].forEach((node) => {
+      if (node !== subList) button.append(node);
+    });
+    navSection.prepend(button);
+    button.addEventListener('click', () => {
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      if (isDesktop.matches) {
+        button.focus();
+        toggleAllNavSections(navSections);
+      }
+      button.setAttribute('aria-expanded', !expanded);
+    });
+  });
 }
 
 /**
@@ -100,7 +174,11 @@ export default async function decorate(block) {
   block.textContent = '';
   const nav = document.createElement('nav');
   nav.id = 'nav';
-  while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
+  nav.setAttribute('aria-label', 'Main');
+  if (fragment) {
+    fragment.querySelectorAll('.metadata-wrapper').forEach((m) => m.remove());
+    while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
+  }
 
   const classes = ['brand', 'sections', 'tools'];
   classes.forEach((c, i) => {
@@ -109,35 +187,14 @@ export default async function decorate(block) {
   });
 
   const navBrand = nav.querySelector('.nav-brand');
-  const brandLink = navBrand.querySelector('.button');
-  if (brandLink) {
-    brandLink.className = '';
-    brandLink.closest('.button-container').className = '';
-  }
+  if (navBrand) decorateBrand(navBrand);
 
   const navSections = nav.querySelector('.nav-sections');
-  if (navSections) {
-    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
-      const subList = navSection.querySelector(':scope > ul');
-      if (!subList) return;
-      navSection.classList.add('nav-drop');
-      // wrap the dropdown label in a button so it is announced as expandable
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.setAttribute('aria-expanded', false);
-      [...navSection.childNodes].forEach((node) => {
-        if (node !== subList) button.append(node);
-      });
-      navSection.prepend(button);
-      button.addEventListener('click', () => {
-        const expanded = button.getAttribute('aria-expanded') === 'true';
-        if (isDesktop.matches) {
-          button.focus();
-          toggleAllNavSections(navSections);
-        }
-        button.setAttribute('aria-expanded', !expanded);
-      });
-    });
+  if (navSections) decorateSections(navSections);
+
+  const navTools = nav.querySelector('.nav-tools');
+  if (navTools && !navTools.textContent.trim() && !navTools.querySelector('img, picture, a')) {
+    navTools.hidden = true;
   }
 
   // hamburger for mobile
@@ -147,7 +204,7 @@ export default async function decorate(block) {
       <span class="nav-hamburger-icon"></span>
     </button>`;
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
-  nav.prepend(hamburger);
+  nav.append(hamburger);
   nav.setAttribute('aria-expanded', 'false');
   // prevent mobile nav behavior on window resize
   toggleMenu(nav, navSections, isDesktop.matches);
