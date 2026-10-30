@@ -42,27 +42,28 @@
 /* media: full-bleed image at the card top */
 .cards .card > .card-media {
   margin: 0 0 calc(var(--cards-primary-padding) - var(--layout-stack-gap));
-  container-type: inline-size;
 }
 
 .cards .card-media picture {
   display: block;
 }
 
-/* a fixed 220px height cut 736x600 uniform photos to 74% where the source showed 100% (content
-   gate § Image crop). Each image keeps its own ratio, capped at a 2:3 portrait (a 9:16 story post
-   would stretch its row to 650px); a grid whose images share a shape (cards.js
-   .cards-media-sized) takes one frame at the median image's ratio, in whole pixels. */
 .cards .card-media img {
   display: block;
   width: 100%;
-  height: auto;
-  max-height: 150cqi;
+  height: var(--cards-primary-media-height);
   object-fit: cover;
 }
 
-.cards.cards-media-sized .card-media img {
-  height: round(calc(100cqi * var(--cards-media-h) / var(--cards-media-w)), 1px);
+/* crop position, authored as a block option where the source frames its images off-centre (or shows an
+   image whole that this frame must crop): "Cards (focus-upper)" keeps the upper third (faces, posts),
+   "Cards (focus-top)" anchors the top edge. Centre is the default. */
+.cards.focus-upper .card-media img {
+  object-position: 50% 30%;
+}
+
+.cards.focus-top .card-media img {
+  object-position: 50% 0%;
 }
 
 /* title: the first link paragraph followed by body text (or a heading) */
@@ -192,5 +193,9 @@
 
   .cards .card:has(> .card-media) > .card-media {
     margin: 0;
+  }
+
+  .cards .card-media img {
+    height: var(--cards-primary-media-height-mobile);
   }
 }

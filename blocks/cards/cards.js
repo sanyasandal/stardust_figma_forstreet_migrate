@@ -23,10 +23,6 @@
  */
 
 const GLYPHS = ['east', 'arrow_forward', 'keyboard_arrow_right', 'chevron_right'];
-// A grid shares one media frame only when every image is within this share of the median
-// image's ratio, so no image loses more than ~9% of its area to the frame (content gate § Image
-// crop, 10 points); a grid of mixed shapes lets each image keep its own.
-const SHAPE_BAND = 0.1;
 const NEW_WINDOW = /\s*\(opens in new window\)\s*$/;
 
 function wrapNode(node, className) {
@@ -38,22 +34,6 @@ function wrapNode(node, className) {
 
 // Read-only classification helper (decisions only, never displayed text).
 const text = (el) => (el ? el.textContent.trim() : '');
-
-// One media frame for the whole grid (rows stay aligned) when its images share a shape: the
-// median image's [width, height] (the delivered attributes). null when sizes are unknown or the
-// shapes differ by more than SHAPE_BAND; each image then keeps its own ratio (cards.css).
-function mediaRatio(block) {
-  const sizes = [...block.querySelectorAll('img')]
-    .map((img) => [Number(img.getAttribute('width')), Number(img.getAttribute('height'))])
-    .filter(([w, h]) => w > 0 && h > 0)
-    .sort((x, y) => x[0] / x[1] - y[0] / y[1]);
-  if (!sizes.length || sizes.length < block.querySelectorAll('img').length) return null;
-  const [w, h] = sizes[Math.floor((sizes.length - 1) / 2)];
-  const median = w / h;
-  const shared = sizes.every(([iw, ih]) => Math.abs(iw / ih / median - 1) <= SHAPE_BAND);
-  if (!shared) return null;
-  return median < 2 / 3 ? [2, 3] : [w, h]; // the same 2:3 portrait cap as an image on its own
-}
 
 // #62/#104 cell-level collector, scoped to one row: expands a media-led cell that the
 // runtime's wrapTextNodes folded into a single <p>.
@@ -154,12 +134,6 @@ function buildCard(nodes) {
 export default function decorate(block) {
   const rows = [...block.children];
   if (!rows.length) return;
-  const ratio = mediaRatio(block);
-  if (ratio) {
-    block.style.setProperty('--cards-media-w', ratio[0]);
-    block.style.setProperty('--cards-media-h', ratio[1]);
-    block.classList.add('cards-media-sized');
-  }
 
   const cards = rows
     .map((row) => collectNodes(row))
