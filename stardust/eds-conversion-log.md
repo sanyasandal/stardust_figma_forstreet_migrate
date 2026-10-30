@@ -31,14 +31,15 @@ formatted-only buttons, `a.button.primary|secondary` in `p.button-wrapper`, `wra
 - **D-EDS-4 — D1 advisories.** `breadcrumbs`, `links`, `cta-banner` and single-card `cards` are single-cell blocks
   over prose by design: each is a donor module with bespoke chrome-like styling (separator glyphs, gold rule,
   bordered box), not plain default content.
-- **D-EDS-5 — image frames follow the content image.** The Figma frames (Text + Image 574×324, card media
-  220 / 188px mobile) are the kit placeholders' shapes; with `object-fit: cover` they cut 58 of 201 content images
-  on 18 pages more than the source does (the principal's portrait 56% vs 96%). `teaser`: the image keeps its own
-  ratio, capped at a 2:3 portrait. `cards`: a grid whose images are all within 10% of the median ratio shares one
-  whole-pixel frame at that ratio (2:3 cap); otherwise each image keeps its own ratio (same cap). Gated by the reskin
-  content gate's image-crop check (0 of 198 cut more after); the Figma gate's image-height checks on content images
-  are recorded waivers. Cost: mobile card / text+image pixel fidelity is lower where Figma's mobile frames crop their
-  own placeholders; a mixed-shape grid has uneven image heights.
+- **D-EDS-5 — the Figma frames keep their size; the crop shows the area the live site shows.** Text + Image media
+  stays 574×324 and card media 220px (188px mobile), `object-fit: cover`. The source frames its images off-centre per
+  component (social post cards `50% 30%`, uniform/media cards `50% 0%`), so a centred crop showed the wrong area. Each
+  `teaser` / `cards` block carries the source's position as an authorable option: `focus-top` (`50% 0%`),
+  `focus-upper` (`50% 30%`; also where the source shows an image (nearly) whole but this frame must crop it top and
+  bottom — a portrait keeps the head), none = centre. The option is decided per block from the source's own framing
+  (`stardust/reskin/media-focus/<slug>.json`, `stardust/reskin/renderers/focus.mjs`): 3 `cards focus-top`, 8 `cards
+  focus-upper`, 16 `teaser focus-upper`. (An interim build that let images keep their own shape was reverted: it broke
+  the donor's frames.)
 - **Fonts.** Inter (OFL) + Roboto Slab (Apache 2.0, the served stand-in for the licensed Lexia) self-hosted in
   `fonts/`, declared in `styles/fonts.css`; tokens keep the donor strings verbatim (`fonts/LICENSING.md`).
 - **Foundation.** `styles/styles.css` is generated from `stardust/reskin/donor-tokens.json` (root-tokens + every
