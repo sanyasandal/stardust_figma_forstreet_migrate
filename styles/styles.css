@@ -347,6 +347,29 @@
   --buttons-tertiary-line-height: 24px;
   --buttons-link-color: rgb(60, 66, 66);
   --buttons-link-text-decoration: underline;
+  --type-email-heading-size: 26px;
+  --type-email-heading-line-height: 32px;
+  --type-email-heading-weight: 700;
+  --type-email-heading-letter-spacing: normal;
+  --type-email-body-size: 16px;
+  --type-email-body-line-height: 24px;
+  --type-email-body-weight: 400;
+  --type-email-body-letter-spacing: normal;
+  --type-email-heading-font-family: Arial, sans-serif;
+  --type-email-heading-font-size: 26px;
+  --type-email-heading-font-weight: 700;
+  --type-email-body-font-family: Arial, sans-serif;
+  --type-email-body-font-size: 16px;
+  --type-email-body-font-weight: 400;
+  --layout-email-width: 674px;
+  --layout-email-padding: 40px;
+  --layout-email-gap: 40px;
+  --layout-modal-width: 568px;
+  --layout-modal-padding: 24px;
+  --layout-modal-gap: 24px;
+  --layout-modal-radius: 12px;
+  --layout-modal-border: 1px solid rgb(216, 218, 218);
+  --layout-back-to-top-height: 64px;
   --type-form-title-size: 36px;
   --type-form-title-line-height: 40px;
   --type-form-title-weight: 400;
@@ -563,6 +586,70 @@ main input[type="range"]:active::-webkit-slider-thumb {
 /* sections */
 main > .section { padding: var(--layout-section-padding-y) 0; }
 
+/* section style "email" (oneAZ M25 Email): default content as the kit's email, a 674px white card
+   (Arial, the kit's email-safe face) on the mist band */
+main > .section.email {
+  background: var(--palette-light-band-bg);
+}
+
+main > .section.email > .default-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--layout-email-gap);
+  max-width: var(--layout-email-width);
+  padding: var(--layout-email-padding);
+  background: var(--palette-page-bg);
+  font-family: var(--type-email-body-font-family);
+  font-size: var(--type-email-body-font-size);
+  line-height: var(--type-email-body-line-height);
+}
+
+main > .section.email > .default-content-wrapper > * {
+  margin: 0;
+}
+
+main > .section.email :is(h1, h2, h3) {
+  font-family: var(--type-email-heading-font-family);
+  font-size: var(--type-email-heading-font-size);
+  font-weight: var(--type-email-heading-font-weight);
+  line-height: var(--type-email-heading-line-height);
+  color: var(--palette-body-fg);
+}
+
+/* back to top (oneAZ M2, scripts/features.js): a 64px band, the accent link right in the 1180 frame */
+.back-to-top {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  box-sizing: content-box;
+  max-width: var(--layout-container-max-width);
+  min-height: var(--layout-back-to-top-height);
+  margin: 0 auto;
+  padding: var(--layout-container-padding);
+}
+
+.back-to-top a:any-link {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--layout-stack-gap) / 2);
+  color: var(--palette-accent);
+  font-family: var(--type-nav-item-font-family);
+  font-size: var(--type-nav-item-font-size);
+  font-weight: var(--type-nav-item-font-weight);
+  line-height: var(--type-nav-item-line-height);
+  text-decoration: none;
+}
+
+.back-to-top a:any-link::after {
+  content: "";
+  width: calc(var(--layout-stack-gap) / 3);
+  height: calc(var(--layout-stack-gap) / 3);
+  border: solid currentcolor;
+  border-width: var(--layout-rule-width) 0 0 var(--layout-rule-width);
+  transform: translateY(25%) rotate(45deg);
+}
+
+
 main > .section > div {
   max-width: var(--layout-container-max-width);
   margin: 0 auto;
@@ -580,6 +667,56 @@ main .section:first-of-type:empty + .section { padding-top: 0; }
     font-size: var(--type-display-mobile-font-size);
     line-height: var(--type-display-mobile-line-height);
   }
+}
+
+/* modal (oneAZ M11, scripts/features.js): white panel, hairline, radius 12, a close button */
+dialog.modal {
+  box-sizing: border-box;
+  width: min(var(--layout-modal-width), 100% - var(--layout-mobile-gutter) * 2);
+  padding: var(--layout-modal-padding);
+  border: var(--layout-modal-border);
+  border-radius: var(--layout-modal-radius);
+  background: var(--palette-page-bg);
+  color: var(--palette-body-fg);
+  box-shadow: var(--shadows-shadow-0-4-6-1-x2);
+}
+
+dialog.modal::backdrop {
+  background: var(--layout-hero-overlay);
+}
+
+/* the modal title: Lexia 26/34 mulberry (the kit's modal heading), whatever level the fragment uses */
+dialog.modal .modal-body :is(h1, h2, h3, h4) {
+  margin: 0;
+  font-family: var(--type-h3-font-family);
+  font-size: var(--type-h3-font-size);
+  font-weight: var(--type-h3-font-weight);
+  line-height: var(--type-h3-line-height);
+}
+
+dialog.modal .modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--layout-modal-gap);
+}
+
+/* stylelint-disable-next-line no-descending-specificity -- only matches inside the dialog, never with the main section rules */
+dialog.modal .modal-body .section {
+  padding: 0;
+}
+
+dialog.modal .modal-close {
+  float: right;
+  width: var(--layout-icon-button-size);
+  height: var(--layout-icon-button-size);
+  margin: 0 0 var(--layout-stack-gap) var(--layout-stack-gap);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radii-button);
+  background:
+    linear-gradient(45deg, transparent 46%, var(--palette-body-fg) 46% 54%, transparent 54%) center / 40% 40% no-repeat,
+    linear-gradient(-45deg, transparent 46%, var(--palette-body-fg) 46% 54%, transparent 54%) center / 40% 40% no-repeat;
+  cursor: pointer;
 }
 
 /* Experience Workspace edit mode: repaint CTAs from their authored marks (EW3) */

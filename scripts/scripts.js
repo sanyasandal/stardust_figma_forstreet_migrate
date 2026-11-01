@@ -215,6 +215,8 @@ async function loadLazy(doc) {
   if (hash && element) element.scrollIntoView();
 
   loadFooter(doc.querySelector('body > footer'));
+  // site features (back to top, modals): loaded like a block, by path
+  import(`${window.hlx.codeBasePath}/scripts/features.js`).then(({ default: features }) => features(doc));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
