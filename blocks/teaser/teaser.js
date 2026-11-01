@@ -11,9 +11,63 @@
  * A cell holding only a picture is the media column; any other cell is a text column.
  * Every cell is optional; extra rows render as further two-column panels.
  *
+ * Variant "Teaser (carousel)" (oneAZ M5 Carousel): every row is a slide; the panels sit in a
+ * horizontally scrolling track (scroll-snap) between previous / next buttons, with one dot per
+ * slide. Buttons and dots are generated controls; the authored panels are not changed.
+ *
  * Editability (EW1–EW3): authored h*, p, lists and pictures are MOVED into generated
  * wrappers, CTAs move as their paragraph; nothing is cloned, rebuilt or retagged.
  */
+
+function control(className, label) {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.className = className;
+  b.setAttribute('aria-label', label);
+  return b;
+}
+
+// Teaser (carousel): the track scrolls one slide per step; the dots follow the scroll position.
+function makeCarousel(block, panels) {
+  const track = document.createElement('div');
+  track.className = 'teaser-track';
+  track.setAttribute('aria-roledescription', 'carousel');
+  track.tabIndex = 0;
+  panels.forEach((panel, k) => {
+    panel.setAttribute('role', 'group');
+    panel.setAttribute('aria-roledescription', 'slide');
+    panel.setAttribute('aria-label', `${k + 1} of ${panels.length}`);
+  });
+  track.append(...panels);
+  const prev = control('teaser-prev', 'Previous slide');
+  const next = control('teaser-next', 'Next slide');
+  const dots = document.createElement('div');
+  dots.className = 'teaser-dots';
+  const dotButtons = panels.map((_, k) => {
+    const d = control('teaser-dot', `Go to slide ${k + 1}`);
+    dots.append(d);
+    return d;
+  });
+  const current = () => Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
+  const go = (k) => {
+    const n = (k + panels.length) % panels.length;
+    track.scrollTo({ left: n * track.clientWidth, behavior: 'smooth' });
+  };
+  const sync = () => {
+    const k = current();
+    dotButtons.forEach((d, j) => d.setAttribute('aria-current', String(j === k)));
+  };
+  prev.addEventListener('click', () => go(current() - 1));
+  next.addEventListener('click', () => go(current() + 1));
+  dotButtons.forEach((d, k) => d.addEventListener('click', () => go(k)));
+  track.addEventListener('scroll', () => window.requestAnimationFrame(sync), { passive: true });
+  track.addEventListener('keydown', (e) => {
+    const step = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+    if (step) { e.preventDefault(); go(current() + step); }
+  });
+  block.replaceChildren(prev, track, next, dots);
+  sync();
+}
 
 function isCta(el) {
   if (el.tagName !== 'P') return false;
@@ -74,5 +128,9 @@ export default function decorate(block) {
     return panel;
   });
 
+  if (block.classList.contains('carousel') && panels.length > 1) {
+    makeCarousel(block, panels);
+    return;
+  }
   block.replaceChildren(...panels);
 }

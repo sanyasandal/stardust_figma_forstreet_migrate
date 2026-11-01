@@ -96,3 +96,63 @@
 .accordion .accordion-panel .table-wrapper:last-child .table {
   margin-bottom: 0;
 }
+
+/* ---- Accordion (tabs): oneAZ M17 Tabs, the same rows laid out as a tab row over one panel ------- */
+.accordion.tabs {
+  display: grid;
+  grid-template-columns: repeat(var(--tabs-count, 1), auto) minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: var(--layout-tabs-gap);
+  border-bottom: 0;
+}
+
+.accordion.tabs .accordion-item {
+  display: contents;
+}
+
+.accordion.tabs .accordion-item + .accordion-item {
+  margin-top: 0;
+}
+
+.accordion.tabs .accordion-title {
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  height: var(--layout-tabs-height);
+  padding: 0 var(--layout-tabs-padding-x);
+  border-radius: var(--layout-tabs-radius);
+  background: var(--palette-light-band-bg);
+  color: var(--palette-body-fg);
+  font-family: var(--type-tab-font-family);
+  font-size: var(--type-tab-font-size);
+  font-weight: var(--type-tab-font-weight);
+  line-height: var(--type-tab-line-height);
+  letter-spacing: var(--type-tab-letter-spacing);
+}
+
+.accordion.tabs .accordion-item.is-open .accordion-title {
+  background: var(--palette-accent);
+  color: var(--palette-page-bg);
+  font-weight: var(--type-tab-active-font-weight);
+}
+
+/* the toggle stays the keyboard / assistive tab (visually hidden); its focus shows on the title */
+.accordion.tabs .accordion-toggle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.accordion.tabs .accordion-item:has(.accordion-toggle:focus-visible) .accordion-title {
+  outline: var(--layout-rule-width) solid var(--palette-accent);
+  outline-offset: var(--layout-rule-width);
+}
+
+.accordion.tabs .accordion-panel {
+  grid-row: 2;
+  grid-column: 1 / -1;
+  padding: var(--layout-stack-gap) 0 0;
+  border-top: var(--layout-rule-width) solid var(--palette-accent);
+}

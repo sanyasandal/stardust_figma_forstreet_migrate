@@ -77,3 +77,165 @@
 .links .links-list li li a:any-link::before {
   content: "— ";
 }
+
+/* stylelint-disable no-descending-specificity -- each variant's rules only match its own block option */
+
+/* ---- Links (tab-nav): oneAZ M16 Tab Nav, a horizontal row of Lexia 14/16 items ---------------- */
+.links.tab-nav .links-list :is(ul, ol) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--layout-tab-nav-gap);
+  border-left: 0;
+  font-family: var(--type-nav-font-family);
+  font-size: var(--type-nav-font-size);
+  font-weight: var(--type-nav-font-weight);
+  line-height: var(--type-nav-line-height);
+}
+
+.links.tab-nav .links-list li {
+  position: relative;
+}
+
+.links.tab-nav .links-list a:any-link {
+  padding: var(--layout-tab-nav-item-padding);
+  color: var(--palette-body-fg);
+}
+
+.links.tab-nav .links-list a[aria-current="page"],
+.links.tab-nav .links-list a:any-link:hover {
+  color: var(--palette-accent);
+}
+
+/* an item with children opens them as a panel below it (hover or keyboard focus) */
+.links.tab-nav .links-list li > :is(ul, ol) {
+  display: none;
+  position: absolute;
+  z-index: 2;
+  top: 100%;
+  left: 0;
+  flex-direction: column;
+  gap: 0;
+  min-width: 100%;
+  background: var(--palette-page-bg);
+  box-shadow: var(--shadows-shadow-0-4-6-1-x2);
+}
+
+.links.tab-nav .links-list li:is(:hover, :focus-within) > :is(ul, ol) {
+  display: flex;
+}
+
+.links.tab-nav .links-list li li a:any-link::before {
+  content: none;
+}
+
+/* an item with children carries the kit's chevron */
+.links.tab-nav .links-list li:has(> :is(ul, ol)) > :is(a, p > a):any-link::after {
+  content: "";
+  display: inline-block;
+  width: calc(var(--layout-stack-gap) / 3);
+  height: calc(var(--layout-stack-gap) / 3);
+  margin-left: calc(var(--layout-stack-gap) / 2);
+  border: solid currentcolor;
+  border-width: 0 var(--layout-rule-width) var(--layout-rule-width) 0;
+  transform: translateY(-25%) rotate(45deg);
+}
+
+/* ---- Links (chips): oneAZ M7 Chips, rounded labels ---------------------------------------------- */
+.links.chips .links-list :is(ul, ol) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--layout-chips-gap);
+  border-left: 0;
+  font-family: var(--type-body-font-family);
+  font-size: var(--type-body-font-size);
+  font-weight: var(--type-body-font-weight);
+  line-height: var(--type-body-line-height);
+}
+
+.links.chips .links-list li {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--layout-chips-height);
+  padding: 0 var(--layout-chips-padding-x);
+  border: var(--layout-chips-border);
+  border-radius: var(--layout-chips-radius);
+  background: var(--palette-page-bg);
+  color: var(--palette-body-fg);
+}
+
+.links.chips .links-list a:any-link {
+  padding: 0;
+  color: inherit;
+}
+
+.links.chips .links-list li:has(> a[aria-current="page"]) {
+  border-color: var(--palette-accent);
+  background: var(--palette-accent);
+  color: var(--palette-page-bg);
+}
+
+/* ---- Links (pagination): oneAZ M12 Pagination ---------------------------------------------------- */
+.links.pagination .links-list :is(ul, ol) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  border-left: 0;
+  font-family: var(--type-pagination-font-family);
+  font-size: var(--type-pagination-font-size);
+  font-weight: var(--type-pagination-font-weight);
+  line-height: var(--type-pagination-line-height);
+}
+
+.links.pagination .links-list li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--layout-pagination-item-size);
+  height: var(--layout-pagination-item-size);
+  color: var(--palette-body-fg);
+}
+
+.links.pagination .links-list a:any-link {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--layout-stack-gap) / 2);
+  padding: 0 calc(var(--layout-stack-gap) / 2);
+  color: var(--palette-body-fg);
+}
+
+.links.pagination .links-list a:any-link:hover {
+  color: var(--palette-subtle-fg);
+}
+
+/* the current page: accent with a 1px accent rule underneath (a linked item or plain text) */
+.links.pagination .links-list li:has(> a[aria-current="page"]),
+.links.pagination .links-list li:not(:has(> a)) {
+  box-shadow: inset 0 calc(var(--layout-pagination-active-rule) * -1) 0 var(--palette-accent);
+  color: var(--palette-accent);
+}
+
+.links.pagination .links-list a[aria-current="page"] {
+  color: var(--palette-accent);
+}
+
+.links.pagination .links-list :is(.links-prev, .links-next)::before,
+.links.pagination .links-list .links-next::after {
+  content: "";
+  width: calc(var(--layout-stack-gap) / 3);
+  height: calc(var(--layout-stack-gap) / 3);
+  border: solid currentcolor;
+  border-width: 0 var(--layout-rule-width) var(--layout-rule-width) 0;
+}
+
+.links.pagination .links-list .links-prev::before {
+  transform: rotate(135deg);
+}
+
+.links.pagination .links-list .links-next::before {
+  content: none;
+}
+
+.links.pagination .links-list .links-next::after {
+  transform: rotate(-45deg);
+}
+/* stylelint-enable no-descending-specificity */

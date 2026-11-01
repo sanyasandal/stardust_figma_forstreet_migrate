@@ -67,5 +67,18 @@ export default function decorate(block) {
     body.append(node);
   });
 
+  // Hero (branded): oneAZ M29 Home Hero Branded. Text column left (a picture before the heading is
+  // the brand logo), the photo right, on the mist band; the photo moves into the content grid.
+  if (block.classList.contains('branded')) {
+    const logo = [...body.children].find((el) => el.matches('p') && el.querySelector('picture, img')
+      && !el.textContent.trim());
+    const kids = [...body.children];
+    const heading = body.querySelector('h1, h2, h3, h4, h5, h6');
+    if (logo && (!heading || kids.indexOf(logo) < kids.indexOf(heading))) logo.classList.add('hero-logo');
+    if (picture) content.append(media);
+    block.replaceChildren(content);
+    return;
+  }
+
   block.replaceChildren(...(picture ? [media] : []), content);
 }

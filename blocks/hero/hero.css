@@ -89,3 +89,62 @@ main > .section.hero-container > .hero-wrapper {
     line-height: var(--type-display-mobile-line-height);
   }
 }
+
+/* ---- Hero (branded): oneAZ M29 Home Hero Branded, text + photo on the mist band ----------------- */
+.hero.branded {
+  min-height: var(--layout-hero-branded-height);
+  background: var(--palette-light-band-bg);
+  color: var(--palette-body-fg);
+}
+
+.hero.branded::after {
+  content: none;
+}
+
+.hero.branded .hero-content {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--layout-hero-branded-gap);
+  align-self: stretch;
+}
+
+.hero.branded .hero-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--layout-hero-branded-text-gap);
+}
+
+.hero.branded .hero-body :is(h1, h2, h3, h4, h5, h6),
+.hero.branded .hero-body p:where(:not(.hero-actions p)) {
+  margin: 0;
+}
+
+.hero.branded .hero-body :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--palette-heading-fg);
+}
+
+.hero.branded .hero-logo {
+  margin: 0;
+  padding: var(--layout-hero-branded-logo-padding-y) 0;
+}
+
+.hero.branded .hero-logo :is(picture, img) {
+  display: block;
+  width: auto;
+  height: var(--layout-hero-branded-logo-height);
+}
+
+.hero.branded .hero-media {
+  position: static;
+}
+
+@media (width < 900px) {
+  .hero.branded .hero-content {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero.branded .hero-media {
+    height: var(--layout-split-media-height-mobile);
+  }
+}

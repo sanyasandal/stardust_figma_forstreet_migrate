@@ -3,7 +3,8 @@
  *
  * Authoring shape (stardust/eds-conversion-log.md, M18): one row per table row, one cell per
  * column; the first row is the header row (th, label type on the mist band). Variant
- * `table (no-header)` renders every row as data cells.
+ * `table (no-header)` renders every row as data cells. Variant `table (summary)` (oneAZ M21
+ * Account summary) renders every row as a label / value pair, laid out in two columns.
  * Defensive decode: a row with no content at all (an empty spacer row) is skipped; a row
  * with fewer cells than the widest row spans its last cell across the remainder.
  *
@@ -16,7 +17,7 @@ const hasContent = (cell) => !!(cell.textContent.trim() || cell.querySelector('p
 export default async function decorate(block) {
   const rows = [...block.children].filter((row) => [...row.children].some(hasContent));
   if (!rows.length) return;
-  const noHeader = block.classList.contains('no-header');
+  const noHeader = block.classList.contains('no-header') || block.classList.contains('summary');
   const cols = Math.max(...rows.map((row) => row.children.length));
 
   const table = document.createElement('table');

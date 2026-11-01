@@ -267,6 +267,86 @@
   --link-hover-color: var(--palette-heading-fg);
   --heading-font-family: var(--type-display-font-family);
   --nav-height: var(--layout-header-height);
+
+  /* oneAZ full vocabulary (tabs, tab nav, pagination, chips, carousel, branded hero, forms, summary, tertiary/link buttons) */
+  --type-tab-size: 14px;
+  --type-tab-line-height: 16px;
+  --type-tab-weight: 400;
+  --type-tab-letter-spacing: normal;
+  --type-tab-active-weight: 700;
+  --type-pagination-size: 16px;
+  --type-pagination-line-height: 24px;
+  --type-pagination-weight: 400;
+  --type-pagination-letter-spacing: normal;
+  --type-tooltip-size: 14px;
+  --type-tooltip-line-height: 16px;
+  --type-tooltip-weight: 500;
+  --type-tooltip-letter-spacing: normal;
+  --palette-subtle-fg: rgb(101, 105, 105);
+  --type-tab-font-family: Inter, Arial, sans-serif;
+  --type-tab-font-size: 14px;
+  --type-tab-font-weight: 400;
+  --type-tab-active-font-weight: 700;
+  --type-pagination-font-family: Lexia, "Roboto Slab", Georgia, serif;
+  --type-pagination-font-size: 16px;
+  --type-pagination-font-weight: 400;
+  --type-tooltip-font-family: Inter, Arial, sans-serif;
+  --type-tooltip-font-size: 14px;
+  --type-tooltip-font-weight: 500;
+  --layout-icon-button-size: 42px;
+  --layout-tabs-height: 50px;
+  --layout-tabs-padding-x: 16px;
+  --layout-tabs-gap: 2px;
+  --layout-tabs-radius: 4px 4px 0px 0px;
+  --layout-tab-nav-item-padding: 12px 16px;
+  --layout-tab-nav-gap: 16px;
+  --layout-pagination-item-size: 40px;
+  --layout-pagination-active-rule: 1px;
+  --layout-chips-height: 28px;
+  --layout-chips-padding-x: 8px;
+  --layout-chips-gap: 8px;
+  --layout-chips-radius: 9999px;
+  --layout-chips-border: 1px solid rgb(216, 218, 218);
+  --layout-carousel-arrow-size: 56px;
+  --layout-carousel-arrow-border: 2px solid rgb(208, 0, 111);
+  --layout-carousel-dot-size: 8px;
+  --layout-carousel-dot-gap: 16px;
+  --layout-carousel-slide-gap: 24px;
+  --layout-carousel-padding-y: 40px;
+  --layout-hero-branded-height: 428px;
+  --layout-hero-branded-gap: 32px;
+  --layout-hero-branded-logo-height: 52px;
+  --layout-hero-branded-logo-padding-y: 32px;
+  --layout-hero-branded-text-gap: 16px;
+  --layout-forms-field-height: 54px;
+  --layout-forms-field-padding: 0px 16px;
+  --layout-forms-field-radius: 4px;
+  --layout-forms-field-border: 1px solid rgb(216, 218, 218);
+  --layout-forms-field-focus-border: 1px solid rgb(208, 0, 111);
+  --layout-forms-label-gap: 4px;
+  --layout-forms-check-size: 20px;
+  --layout-forms-check-radius: 4px;
+  --layout-forms-radio-dot: 10px;
+  --layout-forms-toggle-width: 28px;
+  --layout-forms-toggle-height: 16px;
+  --layout-forms-toggle-knob: 12px;
+  --layout-forms-slider-thumb: 20px;
+  --layout-forms-tooltip-padding: 8px 12px;
+  --layout-forms-tooltip-radius: 12px;
+  --layout-summary-row-gap: 40px;
+  --layout-summary-label-width: 305px;
+  --buttons-tertiary-background: rgb(255, 255, 255);
+  --buttons-tertiary-color: rgb(60, 66, 66);
+  --buttons-tertiary-border: 1px solid rgb(60, 66, 66);
+  --buttons-tertiary-border-radius: 4px;
+  --buttons-tertiary-padding: 0px 16px;
+  --buttons-tertiary-height: 42px;
+  --buttons-tertiary-font-family: Inter, Arial, sans-serif;
+  --buttons-tertiary-font-size: 16px;
+  --buttons-tertiary-font-weight: 700;
+  --buttons-tertiary-line-height: 24px;
+  --buttons-link-color: rgb(60, 66, 66);
+  --buttons-link-text-decoration: underline;
 }
 /* stylelint-enable color-function-notation, color-function-alias-notation, alpha-value-notation, value-keyword-case, comment-empty-line-before, font-family-name-quotes, no-duplicate-selectors, declaration-empty-line-before */
 
@@ -380,6 +460,13 @@ a.button.secondary, button.button.secondary {
   background: var(--buttons-secondary-background);
   color: var(--buttons-secondary-color);
   border: var(--buttons-secondary-border);
+}
+
+/* bold + italic link: the runtime's .accent, the oneAZ tertiary button (ink outline) */
+a.button.accent, button.button.accent {
+  background: var(--buttons-tertiary-background);
+  color: var(--buttons-tertiary-color);
+  border: var(--buttons-tertiary-border);
 }
 
 p.button-wrapper { margin: var(--layout-stack-gap) 0 0; }

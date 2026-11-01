@@ -81,6 +81,46 @@ async function loadPanelFragments(panel) {
   }));
 }
 
+// Accordion (tabs): oneAZ M17 Tabs over the same rows. The DOM stays the accordion's (titles and
+// panels are not moved again, EW1); CSS lays the titles out as a tab row and the toggles become
+// tabs: one panel open at a time, the first by default, arrow keys move between tabs.
+function makeTabs(block, items) {
+  const toggles = items.map((item) => item.querySelector('.accordion-toggle'));
+  const panels = items.map((item) => item.querySelector('.accordion-panel'));
+  block.setAttribute('role', 'tablist');
+  // explicit grid columns: each title takes the next column of the tab row, panels span them all
+  block.style.setProperty('--tabs-count', items.length);
+  items.forEach((item, k) => { item.querySelector('.accordion-title').style.gridColumn = k + 1; });
+  const select = (k, focus) => {
+    items.forEach((item, j) => {
+      const on = j === k;
+      item.classList.toggle('is-open', on);
+      toggles[j].setAttribute('aria-selected', String(on));
+      toggles[j].setAttribute('aria-expanded', String(on));
+      toggles[j].tabIndex = on ? 0 : -1;
+      if (on) panels[j].removeAttribute('hidden');
+      else panels[j].setAttribute('hidden', 'until-found');
+    });
+    if (focus) toggles[k].focus();
+  };
+  items.forEach((item, k) => {
+    toggles[k].setAttribute('role', 'tab');
+    panels[k].setAttribute('role', 'tabpanel');
+    // capture phase: the accordion's own toggle handlers never see a tab click
+    const pick = (e) => { e.stopImmediatePropagation(); select(k, false); };
+    item.querySelector('.accordion-title').addEventListener('click', pick, true);
+    toggles[k].addEventListener('click', pick, true);
+    toggles[k].addEventListener('keydown', (e) => {
+      const step = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+      if (!step) return;
+      e.preventDefault();
+      select((k + step + items.length) % items.length, true);
+    });
+    panels[k].addEventListener('beforematch', () => select(k, false));
+  });
+  select(0, false);
+}
+
 export default async function decorate(block) {
   const rows = [...block.children];
   if (!rows.length) return;
@@ -147,5 +187,6 @@ export default async function decorate(block) {
   });
 
   block.replaceChildren(...items);
+  if (block.classList.contains('tabs')) makeTabs(block, items);
   await Promise.all(fragmentLoads);
 }

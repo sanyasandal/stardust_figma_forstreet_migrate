@@ -32,3 +32,42 @@
 .table :is(th, td) p {
   margin: 0;
 }
+
+/* ---- Table (summary): oneAZ M21 Account summary, label / value pairs in two columns ------------- */
+.table.summary table,
+.table.summary tbody {
+  display: block;
+}
+
+.table.summary tbody {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--layout-summary-row-gap) var(--layout-column-gap);
+}
+
+.table.summary tr {
+  display: grid;
+  grid-template-columns: var(--layout-summary-label-width) minmax(0, 1fr);
+}
+
+.table.summary td {
+  padding: 0;
+  border: 0;
+  color: var(--palette-muted-fg);
+}
+
+.table.summary td + td {
+  color: var(--palette-subtle-fg);
+  font-weight: var(--type-nav-item-font-weight);
+}
+
+@media (width < 900px) {
+  .table.summary tbody,
+  .table.summary tr {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .table.summary tbody {
+    row-gap: var(--layout-stack-gap);
+  }
+}
