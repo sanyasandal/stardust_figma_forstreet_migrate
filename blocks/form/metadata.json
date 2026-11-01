@@ -1,0 +1,22 @@
+{
+  "variantName": "form",
+  "name": "Form",
+  "baseBlock": "form",
+  "version": "1.0.0",
+  "created": "2026-11-01T13:02:31Z",
+  "description": "oneAZ M26 Forms: one row per field; variants login (M30) and steps (M32 + M15 Stepper). Front-end only unless an action row names a URL.",
+  "visualCharacteristics": {
+    "purpose": "form",
+    "density": "comfortable",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "rows of [label][type][options|placeholder][help][tooltip]; step / heading / link / action / success rows",
+    "buttonCount": 1,
+    "imageCount": 0
+  },
+  "variants": [
+    "login",
+    "steps"
+  ]
+}

@@ -16,7 +16,8 @@
     "imageCount": 0
   },
   "variants": [
-    "no-header"
+    "no-header",
+    "summary"
   ],
   "usage": {
     "pagesUsing": [

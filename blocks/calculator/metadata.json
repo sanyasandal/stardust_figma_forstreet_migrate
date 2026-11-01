@@ -1,0 +1,18 @@
+{
+  "variantName": "calculator",
+  "name": "Calculator",
+  "baseBlock": "calculator",
+  "version": "1.0.0",
+  "created": "2026-11-01T13:02:31Z",
+  "description": "oneAZ M24 Calculator: authored inputs and formulas (safe evaluator, no eval).",
+  "visualCharacteristics": {
+    "purpose": "calculator",
+    "density": "comfortable",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "input rows [label][unit][default]; result rows [label][= formula][unit][decimals]",
+    "buttonCount": 0,
+    "imageCount": 0
+  }
+}

@@ -70,5 +70,10 @@
       "school-life/uniform/uniform-shop"
     ],
     "reuseCount": 51
-  }
+  },
+  "variants": [
+    "chips",
+    "pagination",
+    "tab-nav"
+  ]
 }

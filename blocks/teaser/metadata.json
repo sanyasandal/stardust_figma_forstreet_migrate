@@ -32,5 +32,8 @@
       "school-life/travel-to-school"
     ],
     "reuseCount": 13
-  }
+  },
+  "variants": [
+    "carousel"
+  ]
 }

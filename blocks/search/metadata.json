@@ -1,0 +1,18 @@
+{
+  "variantName": "search",
+  "name": "Search",
+  "baseBlock": "search",
+  "version": "1.0.0",
+  "created": "2026-11-01T13:02:31Z",
+  "description": "oneAZ M13 Search Bar over the site query index.",
+  "visualCharacteristics": {
+    "purpose": "search",
+    "density": "compact",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "one optional row [placeholder][index path]",
+    "buttonCount": 0,
+    "imageCount": 0
+  }
+}

@@ -32,5 +32,8 @@
       "school-life/uniform"
     ],
     "reuseCount": 13
-  }
+  },
+  "variants": [
+    "tabs"
+  ]
 }

@@ -21,5 +21,8 @@
       "index"
     ],
     "reuseCount": 1
-  }
+  },
+  "variants": [
+    "branded"
+  ]
 }
