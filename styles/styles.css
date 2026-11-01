@@ -299,6 +299,7 @@
   --layout-tabs-gap: 2px;
   --layout-tabs-radius: 4px 4px 0px 0px;
   --layout-tab-nav-item-padding: 12px 16px;
+  --layout-tab-nav-item-height: 44px;
   --layout-tab-nav-gap: 16px;
   --layout-pagination-item-size: 40px;
   --layout-pagination-active-rule: 1px;

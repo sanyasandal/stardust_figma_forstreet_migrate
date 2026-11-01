@@ -97,6 +97,10 @@
 }
 
 .links.tab-nav .links-list a:any-link {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  min-height: var(--layout-tab-nav-item-height);
   padding: var(--layout-tab-nav-item-padding);
   color: var(--palette-body-fg);
 }
