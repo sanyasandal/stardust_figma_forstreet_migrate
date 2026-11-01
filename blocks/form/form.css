@@ -1,0 +1,347 @@
+/* form — oneAZ M26 Forms; variants login (M30) and steps (M32 + M15 Stepper). Donor tokens only.
+   The text fields, selects and range come from styles.css § form fields. */
+
+.form .form-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--layout-column-gap);
+}
+
+.form .form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--layout-forms-label-gap);
+  min-width: 0;
+}
+
+.form .form-wide,
+.form .form-link {
+  grid-column: 1 / -1;
+}
+
+.form .form-label {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--layout-forms-label-gap) / 2);
+}
+
+.form .form-label p,
+.form .form-help,
+.form .form-link p,
+.form .form-choice p {
+  margin: 0;
+}
+
+.form .form-label p {
+  font-family: var(--type-nav-item-font-family);
+  font-size: var(--type-nav-item-font-size);
+  font-weight: var(--type-nav-item-font-weight);
+  line-height: var(--type-nav-item-line-height);
+  color: var(--palette-body-fg);
+}
+
+.form .form-required {
+  margin-left: calc(var(--layout-forms-label-gap) / 2);
+  color: var(--palette-accent);
+  font-weight: var(--type-body-font-weight);
+}
+
+.form .form-help {
+  color: var(--palette-body-fg);
+  font-size: var(--type-body-font-size);
+  line-height: var(--type-body-line-height);
+}
+
+/* ---- tooltip (M20): an info toggle; the text shows on hover / focus --------------------------- */
+.form .form-tooltip {
+  position: relative;
+  display: inline-flex;
+}
+
+.form .form-tooltip-toggle {
+  width: var(--layout-stack-gap);
+  height: var(--layout-stack-gap);
+  padding: 0;
+  border: var(--layout-rule-width) solid var(--palette-muted-fg);
+  border-radius: 50%;
+  background: var(--palette-page-bg);
+  cursor: help;
+}
+
+.form .form-tooltip-text {
+  position: absolute;
+  z-index: 3;
+  bottom: calc(100% + var(--layout-forms-label-gap) * 2);
+  left: 50%;
+  width: max-content;
+  max-width: calc(var(--layout-forms-field-height) * 5);
+  margin: 0;
+  padding: var(--layout-forms-tooltip-padding);
+  border-radius: var(--layout-forms-tooltip-radius);
+  background: var(--palette-body-fg);
+  box-shadow: var(--shadows-shadow-0-4-6-1-x2);
+  color: var(--palette-page-bg);
+  font-family: var(--type-tooltip-font-family);
+  font-size: var(--type-tooltip-font-size);
+  font-weight: var(--type-tooltip-font-weight);
+  line-height: var(--type-tooltip-line-height);
+  transform: translateX(-50%);
+  visibility: hidden;
+}
+
+.form .form-tooltip:is(:hover, :focus-within) .form-tooltip-text {
+  visibility: visible;
+}
+
+/* ---- checkbox / radio / toggle (M6, M19): the native input stays for keyboard and forms, the
+   drawn mark beside it carries the kit's look -------------------------------------------------- */
+.form .form-choices {
+  display: flex;
+  flex-direction: column;
+  gap: var(--layout-stack-gap);
+}
+
+.form .form-choice {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--layout-forms-check-gap);
+  font-family: var(--type-body-font-family);
+  font-weight: var(--type-body-font-weight);
+  cursor: pointer;
+}
+
+.form .form-choice input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.form .form-mark {
+  position: relative;
+  flex: none;
+  width: var(--layout-forms-check-size);
+  height: var(--layout-forms-check-size);
+  border: 1px solid var(--palette-hairline);
+  border-radius: var(--layout-forms-check-radius);
+  background: var(--palette-page-bg);
+}
+
+.form .form-choice-radio .form-mark {
+  border-radius: 50%;
+}
+
+.form .form-choice-toggle .form-mark {
+  width: var(--layout-forms-toggle-width);
+  height: var(--layout-forms-toggle-height);
+  border-radius: var(--layout-forms-toggle-height);
+  background: var(--palette-light-band-bg);
+}
+
+.form .form-choice-toggle .form-mark::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: calc((var(--layout-forms-toggle-height) - var(--layout-forms-toggle-knob)) / 2 - 1px);
+  width: var(--layout-forms-toggle-knob);
+  height: var(--layout-forms-toggle-knob);
+  border-radius: 50%;
+  background: var(--palette-page-bg);
+  transform: translateY(-50%);
+}
+
+.form .form-choice-checkbox input:checked + .form-mark {
+  border-color: var(--palette-accent);
+  background: var(--palette-accent);
+}
+
+.form .form-choice-checkbox input:checked + .form-mark::after {
+  content: "";
+  position: absolute;
+  top: 18%;
+  left: 34%;
+  width: 28%;
+  height: 50%;
+  border: solid var(--palette-page-bg);
+  border-width: 0 var(--layout-rule-width) var(--layout-rule-width) 0;
+  transform: rotate(45deg);
+}
+
+.form .form-choice-radio input:checked + .form-mark {
+  border-color: var(--palette-accent);
+  box-shadow: inset 0 0 0 calc((var(--layout-forms-check-size) - var(--layout-forms-radio-dot)) / 2 - 1px) var(--palette-page-bg);
+  background: var(--palette-accent);
+}
+
+.form .form-choice-toggle input:checked + .form-mark {
+  border-color: var(--palette-accent);
+  background: var(--palette-accent);
+}
+
+.form .form-choice-toggle input:checked + .form-mark::after {
+  left: auto;
+  right: calc((var(--layout-forms-toggle-height) - var(--layout-forms-toggle-knob)) / 2 - 1px);
+}
+
+.form .form-choice input:focus-visible + .form-mark {
+  outline: var(--layout-rule-width) solid var(--palette-accent);
+  outline-offset: var(--layout-rule-width);
+}
+
+.form .form-choice input:disabled + .form-mark {
+  border-color: var(--palette-light-band-bg);
+  background: var(--palette-light-band-bg);
+}
+
+.form .form-field-submit .button {
+  align-self: flex-start;
+}
+
+.form .form-status [data-error="true"],
+.form .form-status[data-error="true"] {
+  color: var(--palette-accent);
+}
+
+/* ---- Form (login): oneAZ M30 Login, a 550px card: white top, mist footer strip ------------------ */
+.form.login {
+  max-width: var(--layout-login-width);
+  border-radius: var(--radii-card);
+  background: var(--palette-page-bg);
+  box-shadow: var(--shadows-shadow-0-4-6-1-x2);
+  overflow: hidden;
+}
+
+.form.login .form-title {
+  margin: 0;
+  padding: var(--layout-login-padding) var(--layout-login-padding) 0;
+  font-family: var(--type-form-title-font-family);
+  font-size: var(--type-form-title-font-size);
+  font-weight: var(--type-form-title-font-weight);
+  line-height: var(--type-form-title-line-height);
+  color: var(--palette-heading-fg);
+}
+
+.form.login .form-body {
+  padding: var(--layout-login-padding);
+}
+
+.form.login .form-fields {
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--layout-login-field-gap);
+}
+
+.form.login .form-field-submit .button {
+  align-self: stretch;
+}
+
+.form.login .form-footer {
+  display: flex;
+  justify-content: center;
+  gap: var(--layout-stack-gap);
+  padding: var(--layout-login-footer-padding-y) var(--layout-login-padding);
+  background: var(--palette-light-band-bg);
+}
+
+.form.login .form-footer p {
+  margin: 0;
+}
+
+/* ---- Form (steps): oneAZ M32 Quiz with the M15 Stepper, one step at a time ---------------------- */
+.form.steps {
+  padding: 0 0 var(--layout-steps-band-padding);
+  background: var(--palette-light-band-bg);
+}
+
+.form.steps .form-stepper {
+  display: flex;
+  height: var(--layout-forms-stepper-height);
+  margin: 0 0 var(--layout-steps-band-padding);
+  background: var(--palette-stepper-track);
+}
+
+.form.steps .form-stepper-fill {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 var(--layout-stack-gap) 0 0;
+  background: var(--palette-accent);
+  clip-path: polygon(0 0, calc(100% - var(--layout-forms-stepper-height) / 2) 0, 100% 50%, calc(100% - var(--layout-forms-stepper-height) / 2) 100%, 0 100%);
+  transition: width 0.2s ease;
+}
+
+.form.steps .form-stepper-count {
+  color: var(--palette-page-bg);
+  font-family: var(--type-body-small-font-family);
+  font-size: var(--type-body-small-font-size);
+  line-height: var(--type-body-small-line-height);
+}
+
+.form.steps .form-body > :not(.form-stepper) {
+  margin-inline: var(--layout-steps-band-padding);
+}
+
+.form.steps .form-step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--layout-steps-gap);
+  margin: 0;
+  padding: var(--layout-steps-card-padding);
+  border: 0;
+  background: var(--palette-page-bg);
+}
+
+/* a step or control the block hides (the other steps, Back on the first, Next on the last) */
+.form.steps .form-step[hidden],
+.form.steps .form-step-nav [hidden] {
+  display: none;
+}
+
+/* the legend in normal flow (not straddling the fieldset edge) */
+.form.steps .form-step-title {
+  float: left;
+  width: 100%;
+  padding: 0;
+  font-family: var(--type-h2-font-family);
+  font-size: var(--type-h2-font-size);
+  font-weight: var(--type-h2-font-weight);
+  line-height: var(--type-h2-line-height);
+  color: var(--palette-heading-fg);
+}
+
+.form.steps .form-step-title p,
+.form.steps .form-step-intro {
+  margin: 0;
+}
+
+.form.steps .form-step-intro {
+  font-size: var(--type-body-large-font-size);
+  line-height: var(--type-body-large-line-height);
+}
+
+.form.steps .form-choices {
+  gap: var(--layout-steps-option-gap);
+}
+
+.form.steps .form-choice {
+  padding: var(--layout-steps-option-padding);
+  background: var(--palette-light-band-bg);
+}
+
+.form.steps .form-step-nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--layout-stack-gap);
+  padding: 0 calc(var(--layout-steps-band-padding) + var(--layout-stack-gap) * 6) var(--layout-steps-band-padding);
+  background: var(--palette-page-bg);
+}
+
+@media (width < 900px) {
+  .form .form-fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .form.steps .form-step {
+    padding: var(--layout-steps-band-padding) var(--layout-mobile-gutter);
+  }
+}

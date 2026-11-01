@@ -347,6 +347,33 @@
   --buttons-tertiary-line-height: 24px;
   --buttons-link-color: rgb(60, 66, 66);
   --buttons-link-text-decoration: underline;
+  --type-form-title-size: 36px;
+  --type-form-title-line-height: 40px;
+  --type-form-title-weight: 400;
+  --type-form-title-letter-spacing: normal;
+  --palette-stepper-track: rgb(246, 206, 231);
+  --type-form-title-font-family: Lexia, "Roboto Slab", Georgia, serif;
+  --type-form-title-font-size: 36px;
+  --type-form-title-font-weight: 400;
+  --layout-forms-check-gap: 12px;
+  --layout-forms-stepper-height: 24px;
+  --layout-login-width: 550px;
+  --layout-login-padding: 40px;
+  --layout-login-gap: 40px;
+  --layout-login-field-gap: 24px;
+  --layout-login-footer-padding-y: 24px;
+  --layout-login-inset-x: 80px;
+  --layout-steps-card-padding: 40px 96px;
+  --layout-steps-gap: 40px;
+  --layout-steps-option-padding: 16px;
+  --layout-steps-option-gap: 16px;
+  --layout-steps-band-padding: 40px;
+  --layout-calculator-column-gap: 68px;
+  --layout-calculator-gap: 32px;
+  --layout-search-panel-border: 1px solid rgb(208, 0, 111);
+  --layout-search-panel-radius: 8px;
+  --layout-search-result-height: 54px;
+  --layout-search-result-rule: 1px solid rgb(216, 218, 218);
 }
 /* stylelint-enable color-function-notation, color-function-alias-notation, alpha-value-notation, value-keyword-case, comment-empty-line-before, font-family-name-quotes, no-duplicate-selectors, declaration-empty-line-before */
 
@@ -470,6 +497,68 @@ a.button.accent, button.button.accent {
 }
 
 p.button-wrapper { margin: var(--layout-stack-gap) 0 0; }
+
+/* form fields — oneAZ M9 Input / M8 Dropdown / M14 Slider, shared by the form, calculator and search
+   blocks (54px field, hairline border, accent on focus; label Inter 700 16/24) */
+main :is(input:not([type="checkbox"], [type="radio"], [type="range"], [type="hidden"]), select, textarea) {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: var(--layout-forms-field-height);
+  padding: var(--layout-forms-field-padding);
+  border: var(--layout-forms-field-border);
+  border-radius: var(--layout-forms-field-radius);
+  background: var(--palette-page-bg);
+  color: var(--palette-body-fg);
+  font-family: var(--type-body-font-family);
+  font-size: var(--type-body-font-size);
+  line-height: var(--type-body-line-height);
+}
+
+main textarea {
+  padding-block: var(--layout-forms-field-padding);
+  padding-top: var(--layout-stack-gap);
+}
+
+main :is(input, textarea)::placeholder {
+  color: var(--palette-border-fg);
+}
+
+main :is(input:not([type="checkbox"], [type="radio"], [type="range"]), select, textarea):focus {
+  border: var(--layout-forms-field-focus-border);
+  outline: none;
+}
+
+main :is(input, select, textarea):disabled {
+  background: var(--palette-light-band-bg);
+  color: var(--palette-border-fg);
+}
+
+main label {
+  color: var(--palette-body-fg);
+  font-family: var(--type-nav-item-font-family);
+  font-size: var(--type-nav-item-font-size);
+  font-weight: var(--type-nav-item-font-weight);
+  line-height: var(--type-nav-item-line-height);
+}
+
+/* range: a mist track, the kit's 20px white thumb with the hairline ring (accent while dragged) */
+main input[type="range"] {
+  width: 100%;
+  accent-color: var(--palette-accent);
+}
+
+main input[type="range"]::-webkit-slider-thumb {
+  width: var(--layout-forms-slider-thumb);
+  height: var(--layout-forms-slider-thumb);
+  border: 1px solid var(--palette-light-band-bg);
+  border-radius: 50%;
+  background: var(--palette-page-bg);
+  box-shadow: var(--shadows-shadow-0-2-4-2-x2);
+}
+
+main input[type="range"]:active::-webkit-slider-thumb {
+  border-color: var(--palette-accent);
+}
 
 /* sections */
 main > .section { padding: var(--layout-section-padding-y) 0; }

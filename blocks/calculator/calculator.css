@@ -1,0 +1,69 @@
+/* calculator — oneAZ M24 Calculator: slots in two columns (556 + 556, 68 apart), the unit inside
+   the field, results as read-only fields. Inputs come from styles.css § form fields. */
+.calculator .calculator-inputs,
+.calculator .calculator-results {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--layout-stack-gap) var(--layout-calculator-column-gap);
+}
+
+.calculator .calculator-results {
+  margin-top: var(--layout-calculator-gap);
+}
+
+.calculator .calculator-slot {
+  display: flex;
+  flex-direction: column;
+  gap: var(--layout-forms-label-gap);
+  min-width: 0;
+}
+
+.calculator .calculator-label p {
+  margin: 0;
+  font-family: var(--type-nav-item-font-family);
+  font-size: var(--type-nav-item-font-size);
+  font-weight: var(--type-nav-item-font-weight);
+  line-height: var(--type-nav-item-line-height);
+}
+
+.calculator .calculator-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.calculator .calculator-field input {
+  padding-right: calc(var(--layout-stack-gap) * 4);
+}
+
+.calculator .calculator-unit {
+  position: absolute;
+  right: var(--layout-stack-gap);
+  margin: 0;
+  color: var(--palette-body-fg);
+  pointer-events: none;
+}
+
+/* the result: the kit's Metric Display, a field showing the computed value */
+.calculator .calculator-output {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: var(--layout-forms-field-height);
+  padding: var(--layout-forms-field-padding);
+  padding-right: calc(var(--layout-stack-gap) * 4);
+  border: var(--layout-forms-field-border);
+  border-radius: var(--layout-forms-field-radius);
+  background: var(--palette-light-band-bg);
+  color: var(--palette-body-fg);
+  font-family: var(--type-nav-item-font-family);
+  font-weight: var(--type-nav-item-font-weight);
+}
+
+@media (width < 900px) {
+  .calculator .calculator-inputs,
+  .calculator .calculator-results {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

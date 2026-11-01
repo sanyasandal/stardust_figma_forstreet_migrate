@@ -1,0 +1,97 @@
+/* search — oneAZ M13 Search Bar: the kit's field with a search icon and a clear control; results
+   in the expanded panel (white, 1px accent, radius 8, 54px rows over a hairline). */
+.search {
+  position: relative;
+}
+
+.search .search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search .search-input {
+  padding-left: calc(var(--layout-stack-gap) * 3);
+  padding-right: calc(var(--layout-stack-gap) * 3);
+  appearance: none;
+}
+
+.search .search-input::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+/* the magnifier: a ring and a handle, drawn in the ink colour */
+.search .search-box::before {
+  content: "";
+  position: absolute;
+  left: var(--layout-stack-gap);
+  width: calc(var(--layout-stack-gap) * 0.75);
+  height: calc(var(--layout-stack-gap) * 0.75);
+  border: var(--layout-rule-width) solid var(--palette-body-fg);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.search .search-clear {
+  position: absolute;
+  right: var(--layout-stack-gap);
+  width: var(--layout-stack-gap);
+  height: var(--layout-stack-gap);
+  padding: 0;
+  border: 0;
+  background:
+    linear-gradient(45deg, transparent 45%, var(--palette-body-fg) 45% 55%, transparent 55%),
+    linear-gradient(-45deg, transparent 45%, var(--palette-body-fg) 45% 55%, transparent 55%);
+  cursor: pointer;
+}
+
+.search .search-results {
+  margin-top: var(--layout-forms-label-gap);
+  border: var(--layout-search-panel-border);
+  border-radius: var(--layout-search-panel-radius);
+  background: var(--palette-page-bg);
+  overflow: hidden;
+}
+
+.search .search-results ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.search .search-results li {
+  display: flex;
+  align-items: center;
+  min-height: var(--layout-search-result-height);
+  border-top: var(--layout-search-result-rule);
+}
+
+.search .search-results li:first-child {
+  border-top: 0;
+}
+
+.search .search-results a:any-link {
+  display: block;
+  width: 100%;
+  padding: 0 var(--layout-stack-gap);
+  color: var(--palette-body-fg);
+  text-decoration: none;
+}
+
+.search .search-results a:any-link:hover {
+  color: var(--palette-accent);
+}
+
+.search .search-more {
+  margin: var(--layout-stack-gap);
+}
+
+.search .search-note {
+  margin: 0;
+  padding: 0 var(--layout-stack-gap) var(--layout-stack-gap);
+  color: var(--palette-muted-fg);
+}
+
+.search .search-note:empty {
+  display: none;
+}
